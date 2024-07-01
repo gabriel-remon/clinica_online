@@ -6,7 +6,7 @@ export const routes_solicitar: Routes = [
         loadComponent: ()=> import('./solicitar.component').then(m=>m.SolicitarComponent)
     },
     {
-        path: 'solicitar',
+        path: ':id',
         loadChildren: ()=> import('./especialidad/especialidad.routes').then(m=>m.routes_especialidad)
     }
 ];

@@ -1,1 +1,32 @@
-<p>perfil.min works!</p>
+
+            <div class="card-body contenedor">
+                <div class="row align-items-center">
+                    <div class="col-lg-2 ">
+                         <img class="border shadow border-black"  [src]="userLogin?.foto_perfil"
+                            alt="..."></div>
+                    <div class="col-lg-8">
+                        <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded nombre">
+                            <h3 class="h2 text-white mb-0">{{userLogin?.nombre}} {{userLogin?.apellido}}r</h3> 
+                        </div>
+                        <ul class="list-unstyled mb-1-9">
+                            <li class="mb-2 mb-xl-3 display-28"><span
+                                    class="display-26 text-secondary me-2 font-weight-600">Rol:</span> {{userLogin?.rol}}</li>
+                            
+                            <li class="mb-2 mb-xl-3 display-28"><span
+                                    class="display-26 text-secondary me-2 font-weight-600">Email:</span>{{userLogin?.email}}
+                            </li>
+                            <li class="mb-2 mb-xl-3 display-28"><span
+                                    class="display-26 text-secondary me-2 font-weight-600">Cantidad de especialidades:</span>{{userLogin?.especialidades?.length}}</li>
+                            <li class="mb-2 mb-xl-3 display-28">
+                                <button (click)="utilSvc.goto('home/perfil')" class="btn btn-info   mt-4 fw-semibold shadow-sm">
+                                    editar perfil
+                                </button>
+                            </li>
+                       
+                        </ul>
+
+
+                    </div>
+                </div>
+            </div>
+            

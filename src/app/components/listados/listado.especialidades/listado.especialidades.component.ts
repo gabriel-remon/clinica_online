@@ -15,14 +15,24 @@ export class ListadoEspecialidadesComponent {
 
   @Output() especialidadesActuales = new EventEmitter<Especialidad[]>();
 
+  @Input() editable: boolean=true;
   @Input() especialidaIn!: Especialidad|null;
+  @Input() listaEspecialidades!: Especialidad[]|null;
   toastSvc = inject(ToastrService)
   especialidades: Especialidad[] = []
+
 
   enviarEspecialidades(){
     this.especialidadesActuales.emit(this.especialidades)
   }
 
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    if(this.listaEspecialidades){
+      this.especialidades = this.listaEspecialidades
+    }
+  }
   ngOnChanges(){
     if(this.especialidaIn){
       if(!this.especialidades.includes(this.especialidaIn)){
@@ -37,7 +47,7 @@ export class ListadoEspecialidadesComponent {
   }
 
   eliminarItem(especialida: Especialidad) {
-    if (this.especialidades.includes(especialida)) {
+    if (this.especialidades.includes(especialida) && this.editable) {
       const index = this.especialidades.indexOf(especialida);
       if (index > -1) {
         this.especialidades.splice(index, 1);

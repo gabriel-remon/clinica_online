@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ListadoUsuariosComponent } from '../../../components/listados/listado.usuarios/listado.usuarios.component';
 import { HeaderComponent } from '../../../components/header/header.component';
+import { UtilService } from '../../../core/services/util.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -11,4 +12,5 @@ import { HeaderComponent } from '../../../components/header/header.component';
 })
 export class UsuariosComponent {
 
+  utilSvc = inject(UtilService)
 }

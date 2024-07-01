@@ -1,1 +1,48 @@
-<p>perfil works!</p>
+<div class="card-body contenedor">
+    <div class="row align-items-center">
+        <div class="col">
+            <img class="border shadow border-black" [src]="usuario?.foto_perfil" alt="...">
+        </div>
+        <div class="col">
+            <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded nombre">
+                <h3 class="h2 text-white mb-0"> <input class="col" type="text"readonly value={{usuario?.nombre}}>
+                    <input class="col" type="text"readonly value={{usuario?.apellido}}> </h3>
+            </div>
+            <ul class="list-unstyled mb-1-9">
+                <li class="mb-2 mb-xl-3 display-28"><span
+                        class="display-26 text-secondary me-2 font-weight-600">Rol:</span> {{usuario?.rol}}
+                    </li>
+
+                <li class="mb-2 mb-xl-3 display-28"><span
+                        class="display-26 text-secondary me-2 font-weight-600">Email:</span>{{usuario?.email}}
+                </li>
+
+                <li class="mb-2 mb-xl-3 display-28"><span
+                        class="display-26 text-secondary me-2 font-weight-600">DNI:</span>
+                        <input type="number"readonly value={{usuario?.dni}}>
+                </li>
+
+                <li class="mb-2 mb-xl-3 display-28">
+                    <span class="display-26 text-secondary me-2 font-weight-600">Fecha
+                        de nacimiento:</span>
+                    <input type="date"readonly value={{usuario?.fecha_nacimiento}}>
+                </li>
+
+                <li class="mb-2 mb-xl-3 display-28"><span
+                        class="display-26 text-secondary me-2 font-weight-600">Edad:</span>{{calcularEdad(usuario.fecha_nacimiento)}} años
+                </li>
+
+                <li class="mb-2 mb-xl-3 display-28">
+                    <button class="btn btn-info   mt-4 fw-semibold shadow-sm" (click)="editar()">
+                        {{edicion?'Confirmar':'Editar'}}
+                         
+                        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="edit"></mat-icon>
+                    </button>
+                </li>
+
+            </ul>
+
+
+        </div>
+    </div>
+</div>

@@ -16,7 +16,7 @@ export class AuthService {
   auth = inject(Auth)
   toastSVC = inject(ToastrService)
   storage = getStorage()
-  userLogin: boolean = false;
+  userLogin!: User|null;
   user: any;
   dbFirebase = inject(Firestore)
   rol!: "admin" | "especialista" | "paciente";
@@ -34,7 +34,10 @@ export class AuthService {
       (user) => {
         if (user) {
           this.user = user
-          this.userSubject.next(user);
+          const userLogin = this.getDocument(user.uid).subscribe(data=>{
+            this.userLogin = data
+            this.userSubject.next(data);
+          })
 
         } else {
           this.user = null
@@ -94,13 +97,13 @@ export class AuthService {
 
     await signInWithEmailAndPassword(this.auth, email!, password!).then(async res => {
       if (res.user.emailVerified) {
-        this.userLogin = true;
         this.user = res.user
-
+        
         await this.getDocument(res.user.uid).subscribe((data) => {
           if (data.rol == 'especialista') {
             if (data.especialista_valido) {
               this.rol = data.rol
+              this.userLogin = data;
               this.userSubject.next(res.user);
               this.toastSVC.success("usuario logueado con exito", "Bienvenido")
               if (calback) calback()
@@ -207,6 +210,29 @@ export class AuthService {
     const snapshot = await getDocs(q);
     return snapshot.docs.length !== 0;
   }
+
+  getData(funcion:(repartidores:User[])=>void,finaly?:()=>void) {
+    // Crear una consulta ordenada por el campo 'fecha' en orden ascendente
+    const mensajeRef = collection(this.dbFirebase,this.bdUsuarios)
+    const q = query(mensajeRef)
+    
+    try{
+      return onSnapshot(q,(snapshot:QuerySnapshot)=>{
+        let repartidores :User[] =[];
+        snapshot.forEach((doc:QueryDocumentSnapshot)=>{
+          let repartidorIn =  doc.data() as User
+          repartidores.push( repartidorIn)
+        })
+        funcion(repartidores)
+        finaly?finaly():""
+      })
+    }catch(error){
+      finaly?finaly():""
+      return error
+    }
+  }
+
+
 
 
   //cambia el mensaje de erorr de firebase por uno personalizado

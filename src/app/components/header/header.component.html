@@ -5,14 +5,15 @@
             <i class="bi bi-distribute-vertical"></i>
         </a>
         <ul class="dropdown-menu text-small shadow" >
-          <li><a class="dropdown-item active" (click)="utilsSvc.goto('home')" aria-current="page">Home</a></li>
+          <li><a class="dropdown-item" (click)="utilsSvc.goto('home')" aria-current="page">Home</a></li>
           <li><a class="dropdown-item" (click)="utilsSvc.goto('home/perfil')">Perfil</a></li>
-          <li><a class="dropdown-item" (click)="utilsSvc.goto('home/usuarios')">usuarios</a></li>
-          <li><a class="dropdown-item" (click)="utilsSvc.goto('home/turnos/paciente')">Turnos paciente</a></li>
-          <li><a class="dropdown-item" (click)="utilsSvc.goto('home/turnos/admin')">Turnos admin</a></li>
-          <li><a class="dropdown-item" (click)="utilsSvc.goto('home/turnos/especialista')">Turnos especialistas</a></li>
+
+          <li><a class="dropdown-item" *ngIf="usuarioLogin.rol == 'admin'" (click)="utilsSvc.goto('home/usuarios')">usuarios</a></li>
+          <li><a class="dropdown-item" *ngIf="usuarioLogin.rol == 'paciente'" (click)="utilsSvc.goto('home/turnos/paciente')">Turnos</a></li>
+          <li><a class="dropdown-item" *ngIf="usuarioLogin.rol == 'admin'" (click)="utilsSvc.goto('home/turnos/admin')">Turnos</a></li>
+          <li><a class="dropdown-item" *ngIf="usuarioLogin.rol == 'especialista'" (click)="utilsSvc.goto('home/turnos/especialista')">Turnos</a></li>
           <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="#">Cerrar secion</a></li>
+          <li><a class="dropdown-item" (click)="athSvc.logout()">Cerrar secion</a></li>
         </ul>
       </div>
 

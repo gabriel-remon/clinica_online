@@ -12,7 +12,7 @@ export interface User{
     rol: "admin"|"especialista" | "paciente",
 
     //atributos del especialista
-    especialidad:Especialidad[]|null,
+    especialidades:Especialidad[]|null,
     especialista_valido:boolean|null,
     
     //atributos del paciente

@@ -1,1 +1,24 @@
-<p>horario.especialista works!</p>
+<div class="container text-center">
+    <div class="contenedor">
+        <div class="row">
+            <ng-container *ngFor="let item of horarios">
+                <div class="col ">
+                    <div class="card tarjeta shadow seleccionada" [ngClass]="{'seleccionada': item.activo}" (dblclick)="seleccionar(item)">
+                        <div class="card-body contenedorCard">
+                            <h5 class="card-title">{{item.dia}}</h5>
+                            <div>
+                                <div class="dato">
+                                    <label for="nombre">Hora inicio</label>
+                                    <input type="time" class="form-control" [value]="convertirHora(item.hora_inicio)">
+                                </div>
+                                <div class=" dato">
+                                    <label for="nombre">Hora fin</label>
+                                    <input type="time" class="form-control" [value]="convertirHora(item.hora_fin)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
