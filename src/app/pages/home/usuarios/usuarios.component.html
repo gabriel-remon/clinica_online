@@ -1,1 +1,31 @@
 <app-header></app-header>
+
+<div class="container text-center">
+    <div class="contenedor">
+        <div class="row">
+            <h1>Lista de usuarios registrados</h1>
+            <div>
+                <app-listado-usuarios></app-listado-usuarios>
+            </div>
+        </div>
+        <div class="row">
+            <h2>Registro de usuario</h2>
+            <div class="col">
+                <div class="circle" (click)="utilSvc.goto('home/usuarios/especialista')">
+                    <img src="assets/especialista.png" >
+                </div>
+            </div>
+            <div class="col">
+                <div class="circle" (click)="utilSvc.goto('home/usuarios/paciente')">
+                    <img src="assets/paciente.png" >
+                </div>
+            </div>
+            <div class="col">
+                <div class="circle" (click)="utilSvc.goto('home/usuarios/admin')">
+                    <img src="assets/admin.png" >
+                </div>
+            </div>
+        </div>
+       
+    </div>
+</div>

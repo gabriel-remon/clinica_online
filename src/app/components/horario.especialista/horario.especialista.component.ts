@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-horario.especialista',
+  selector: 'app-horario-especialista',
   standalone: true,
   imports: [],
   templateUrl: './horario.especialista.component.html',

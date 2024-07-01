@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
 import { FormObraSocialComponent } from '../../modals/form.obra.social/form.obra.social.component';
 @Component({
-  selector: 'app-tabla.obra.social',
+  selector: 'app-tabla-obra-social',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './tabla.obra.social.component.html',

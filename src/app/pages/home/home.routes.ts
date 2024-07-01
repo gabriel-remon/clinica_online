@@ -7,7 +7,7 @@ export const routes_home: Routes = [
     },
     {
         path: 'perfil',
-        loadComponent: ()=> import('./perfil/perfil.component').then(m=>m.PerfilComponent)
+        loadComponent: ()=> import('./perfil/perfil.component').then(m=>m.PerfilPage)
     },
     {
         path: 'solicitar',

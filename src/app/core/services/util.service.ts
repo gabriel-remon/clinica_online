@@ -9,7 +9,13 @@ export class UtilService {
   http = inject( HttpClient)
   router = inject(Router)
 
-  goto(path : string){
-    this.router.navigate([path]);
+  goto(path : string,params?:string){
+    if(params){
+      
+      this.router.navigate([path,params]);
+    }else{
+      this.router.navigate([path]);
+
+    }
   }
 }

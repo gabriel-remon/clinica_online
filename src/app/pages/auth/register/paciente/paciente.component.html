@@ -11,7 +11,7 @@
         <h4  *ngIf="!obraSocial">Seleccione una obra social de la lista obra social</h4>
         <ng-container *ngIf="obraSocial">
           <h4>Obra social</h4>
-        <app-item class="obra social" [obraSocial]="obraSocial"></app-item>
+        <app-item-obra-social [obraSocial]="obraSocial"></app-item-obra-social>
         </ng-container>
       </div>
     </div>
@@ -20,7 +20,7 @@
       <div class="col">
 
           <h3>lista de obras sociales</h3>
-          <app-tabla class="obra social" (heladoElegido)="seleccionar($event)"></app-tabla>
+          <app-tabla-obra-social (heladoElegido)="seleccionar($event)"></app-tabla-obra-social>
 
         
       </div>

@@ -1,1 +1,39 @@
 <app-header></app-header>
+
+
+
+<div class="container text-center">
+    <div class="contenedor">
+        <div class="row">
+            <div class="col">
+                <app-perfil></app-perfil>
+            </div>
+            <div class="col">
+                <app-listado-especialidades></app-listado-especialidades>
+            </div>
+            <div class="col">
+                <app-item-obra-social  *ngIf="obraSocial"></app-item-obra-social>
+            </div>
+        </div>
+
+        <ng-container>
+            <div class="row">
+                <app-tabla-especialidad></app-tabla-especialidad>
+            </div>
+            <div class="row">
+                <app-horario-especialista></app-horario-especialista>
+            </div>
+        </ng-container>
+        
+        <ng-container>
+            <div class="row">
+                <app-tabla-obra-social></app-tabla-obra-social>
+            </div>
+            <div class="row">
+                <app-historal-paciente></app-historal-paciente>
+            </div>
+        </ng-container>
+        
+       
+    </div>
+</div>

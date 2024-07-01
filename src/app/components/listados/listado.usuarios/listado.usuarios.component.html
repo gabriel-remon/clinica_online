@@ -1,0 +1,122 @@
+<div class="contenedorTabla">   
+    <div class="bootstrap-table bootstrap3">
+        <div class="fixed-table-toolbar">
+            <div class="columns columns-right btn-group pull-right"><button class="btn btn-default" type="button"
+                    name="refresh" aria-label="Refresh" title="Refresh"><i
+                        class="glyphicon glyphicon-refresh icon-refresh"></i> </button><button class="btn btn-default"
+                    type="button" name="toggle" aria-label="Show card view" title="Show card view"><i
+                        class="glyphicon glyphicon-list-alt icon-list-alt"></i> </button>
+                <div class="keep-open btn-group">
+    
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="dropdown-item-marker" role="menuitem"><label><input type="checkbox" data-field="id"
+                                    value="0" checked="checked"> <span>ID</span></label></li>
+                        <li class="dropdown-item-marker" role="menuitem"><label><input type="checkbox" data-field="name"
+                                    value="1" checked="checked"> <span>Name</span></label></li>
+                        <li class="dropdown-item-marker" role="menuitem"><label><input type="checkbox" data-field="salary"
+                                    value="2" checked="checked"> <span>Salary</span></label></li>
+                        <li class="dropdown-item-marker" role="menuitem"><label><input type="checkbox" data-field="country"
+                                    value="3" checked="checked"> <span>Country</span></label></li>
+                        <li class="dropdown-item-marker" role="menuitem"><label><input type="checkbox" data-field="city"
+                                    value="4" checked="checked"> <span>City</span></label></li>
+                        <li class="dropdown-item-marker" role="menuitem"><label><input type="checkbox" data-field="actions"
+                                    value="5" checked="checked"> <span>Actions</span></label></li>
+                    </ul>
+                </div>
+            </div>
+    
+        </div>
+    
+        <div class="fixed-table-container" style="padding-bottom: 0px;">
+            <div class="fixed-table-header" style="display: none;">
+                <table></table>
+            </div>
+            <div class="fixed-table-body">
+    
+                <table id="fresh-table" class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th data-field="id">
+                                <div class="th-inner ">Nombre</div>
+                                <div class="fht-cell"></div>
+                            </th>
+                            <th data-field="name">
+                                <div class="th-inner sortable both">DNI</div>
+                                <div class="fht-cell"></div>
+                            </th>
+                            <th data-field="salary">
+                                <div class="th-inner sortable both">Edad</div>
+                                <div class="fht-cell"></div>
+                            </th>
+                            <th data-field="country">
+                                <div class="th-inner sortable both">Rol</div>
+                                <div class="fht-cell"></div>
+                            </th>
+                            <th data-field="city">
+                                <div class="th-inner ">Cuenta</div>
+                                <div class="fht-cell"></div>
+                            </th>
+                            <th data-field="actions">
+                                <div class="th-inner ">Actions</div>
+                                <div class="fht-cell"></div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <ng-container *ngFor="let item of usuarios[0]">
+                            <tr data-index="0">
+                                <td>{{item.nombre}} {{item.apellido}}</td>
+                                <td>{{item.dni}}    </td>
+                                <td>{{calcularEdad(item.fecha_nacimiento)}}</td>
+                                <td>{{item?.especialista_valido?'Habilitada':'Bloqueada'}}</td>
+                                <td>{{item.rol}}</td>
+                                <td>
+                                    <ng-container *ngIf="item?.rol=='especialista'">
+                                        <div class="" *ngIf="item?.especialista_valido">
+                                            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="cancel"></mat-icon>
+                                            <samp>Bloquear</samp>
+                                        </div>
+                                        <div class="" *ngIf="!item?.especialista_valido" (click)="cambiarEstado(item)">
+                                            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="thumb_up"></mat-icon>
+                                            <samp>Habilitar</samp>
+                                        </div>
+                                    </ng-container>
+                                </td>
+                            </tr>
+                        </ng-container>
+                        
+                    </tbody>
+                </table>
+            </div>
+            <div class="fixed-table-footer"></div>
+        </div>
+
+        <!--
+        <div class="fixed-table-pagination">
+            <div class="pull-left pagination-detail"><span class="pagination-info">
+    
+                </span>
+    
+            </div>
+            <div class="pull-right pagination">
+                <ul class="pagination">
+                    <li class="page-item page-pre"><a class="page-link" aria-label="previous page"
+                            href="javascript:void(0)">‹</a></li>
+                    <li class="page-item active"><a class="page-link" aria-label="to page 1" href="javascript:void(0)">1</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" aria-label="to page 2" href="javascript:void(0)">2</a></li>
+                    <li class="page-item"><a class="page-link" aria-label="to page 3" href="javascript:void(0)">3</a></li>
+                    <li class="page-item"><a class="page-link" aria-label="to page 4" href="javascript:void(0)">4</a></li>
+                    <li class="page-item"><a class="page-link" aria-label="to page 5" href="javascript:void(0)">5</a></li>
+                    <li class="page-item page-last-separator disabled"><a class="page-link" aria-label=""
+                            href="javascript:void(0)">...</a></li>
+                    <li class="page-item"><a class="page-link" aria-label="to page 13" href="javascript:void(0)">13</a></li>
+                    <li class="page-item page-next"><a class="page-link" aria-label="next page"
+                            href="javascript:void(0)">›</a></li>
+                </ul>
+            </div>
+        </div>
+    -->
+    </div>
+</div>

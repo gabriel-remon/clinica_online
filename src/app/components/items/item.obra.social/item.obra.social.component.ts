@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ObraSocial } from '../../../core/models/obra.social.model';
 
 @Component({
-  selector: 'app-item.obra.social',
+  selector: 'app-item-obra-social',
   standalone: true,
   imports: [],
   templateUrl: './item.obra.social.component.html',

@@ -3,19 +3,19 @@
 <div class="container text-center">
     <div class="contenedor">
         <div class="row elemento perfil shadow">
-            <p> elementp</p>
+            <app-perfil-min></app-perfil-min>
         </div>
         <div class="row elemento carrucel shadow">
-            <p> elementp</p>
+            <app-carrusel-especialidades></app-carrusel-especialidades>
         </div>
-        <div class="row boton shadow">
-            <p> elementp</p>
+        <div class="row boton border border-black shadow" (click)="utilsSvc.goto('home/usuarios')">
+            <p> USUARIOS</p>
         </div>
-        <div class="row boton shadow">
-            <p> elementp</p>
+        <div class="row boton border border-black shadow" (click)="utilsSvc.goto('home/turnos')">
+            <p> MIS TURNOS</p>
         </div>
-        <div class="row boton shadow">
-            <p> elementp</p>
+        <div class="row boton border border-black shadow" (click)="utilsSvc.goto('home/pacientes')">
+            <p> PACIENTES</p>
         </div>
     </div>
 </div>
