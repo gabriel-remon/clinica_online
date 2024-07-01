@@ -1,0 +1,21 @@
+<div class="container text-center contenedor border border-black"  >
+
+    <button type="button" class="row btn btn-primary" (click)="agregarEspecilidad()">
+        ingresar nueva especialidad
+    </button>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 ">
+        <ng-container *ngFor="let item of obra_sociales">
+            <div class="col"  (click)="seleccionar(item)" [id]="item.id">
+                <div class="circulo">
+                <img [src]="item.src_foto" alt="">
+                <div class="bg-dark text-light titulo">
+                    <p>{{item.nombre}}</p>
+                </div>
+     
+              </div>
+            </div>
+        </ng-container>
+
+    </div>
+  </div>

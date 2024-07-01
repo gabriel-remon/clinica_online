@@ -1,0 +1,27 @@
+.contenedor {
+    height: 90%;
+    width: 90%;
+    max-height: 600px;
+    border-radius: 20px;
+    background-color: #e6d378;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .list-group {
+    overflow-y: auto;
+    width: 90%;
+  }
+  
+  .list-group-item {
+    position: relative;
+  }
+  
+  .list-group-item:first-child {
+    margin-top: 0;
+  }
+  
+  .list-group-item:not(:first-child) {
+    margin-top: 10px;
+  }
+  

@@ -1,0 +1,55 @@
+.circulo{
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    border-radius: 50%;
+    background-color: black;
+    text-align: center;
+    align-items: center;
+
+    overflow: hidden; /* Oculta el contenido que se desborda */
+
+
+}
+img{
+    margin-top: 5px;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    
+}
+
+
+.titulo{
+    margin: auto;
+    z-index: 999;
+    transform: translateY(0px);
+    width: 80%;
+    height: 30px;
+    margin: auto;
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+    border-radius: 10px;
+}
+.top{
+    height: 80%;
+}
+.bot{
+    height: 20%;
+}
+
+.contenedor{
+    background-color: #e6d378;
+    border-radius: 50px;
+    margin: 20px;
+    border: 3px black;
+    width: 90%;
+    height: 270px;
+    align-items: center;
+
+}
+button{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

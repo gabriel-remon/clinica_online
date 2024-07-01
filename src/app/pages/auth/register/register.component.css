@@ -1,0 +1,29 @@
+.circle {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #E6D378; /* Cambia el color según tu preferencia */
+    color: white;
+    font-size: 1.5em;
+    text-align: center;
+    border: black;
+  }
+  .half {
+    height: 100vh;
+  }
+
+  img{
+    height: 100%;
+    width: 100%;
+  }
+
+  h3{
+    margin-top: 10%;
+    margin-bottom: 5%;
+    font-size: 40px;
+    text-decoration: underline;
+    
+  }

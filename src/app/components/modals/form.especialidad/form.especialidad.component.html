@@ -1,0 +1,25 @@
+
+<form class="needs-validation contenedor" (submit)="submit()" [formGroup]="this.form">
+    <h3 class="text-center ">Nueva especialidad</h3>
+    <div class="row g-3">
+        
+
+        <div class="form-floating">
+            <input type="text" class="form-control" id="nombre" placeholder="nombre" [formControl]="form.controls.nombre">
+            <label for="nombre">nombre:</label>
+            <div class="text-danger" *ngIf="form.get('nombre')?.touched">
+                <label *ngIf="form.controls.nombre.getError('required')">nombre requerido</label>
+                <label *ngIf="form.controls.nombre.getError('minlength')">ingrese por lo menos una letra</label>
+            </div>
+        </div>
+        <div class="form-floating">
+            <input type="file" class="form-control" id="foto" placeholder="foto" (change)="cargarFoto($event)" [formControl]="form.controls['foto']">
+            <label for="foto">Logo:</label>
+            <div class="text-danger" *ngIf="form.get('foto')?.touched">
+                <label *ngIf="form.controls['foto'].getError('required')">foto requerido</label>
+            </div>
+        </div>
+    </div>
+    <hr class="my-4">
+    <button class="w-100 btn btn-primary btn-lg" type="" [disabled]="!form.valid"  [textContent]="tipoForm" ></button>
+</form>

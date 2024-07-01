@@ -1,0 +1,30 @@
+<header class="py-2 mb-2 border-bottom " >
+    <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;">
+      <div class="dropdown">
+        <a href="#" class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-distribute-vertical"></i>
+        </a>
+        <ul class="dropdown-menu text-small shadow" >
+          <li><a class="dropdown-item active" (click)="utilsSvc.goto('home')" aria-current="page">Home</a></li>
+          <li><a class="dropdown-item" (click)="utilsSvc.goto('home/perfil')">Perfil</a></li>
+          <li><a class="dropdown-item" (click)="utilsSvc.goto('home/usuarios')">usuarios</a></li>
+          <li><a class="dropdown-item" (click)="utilsSvc.goto('home/turnos/paciente')">Turnos paciente</a></li>
+          <li><a class="dropdown-item" (click)="utilsSvc.goto('home/turnos/admin')">Turnos admin</a></li>
+          <li><a class="dropdown-item" (click)="utilsSvc.goto('home/turnos/especialista')">Turnos especialistas</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#">Cerrar secion</a></li>
+        </ul>
+      </div>
+
+      <div class="d-flex align-items-end ">
+        <form class="me-3" role="search">
+          <p>{{this.athSvc.user?.email}}</p>
+        </form>
+        <div class="dropdown">
+          <a  class="d-block link-body-emphasis text-decoration-none " data-bs-toggle="dropdown" aria-expanded="false">
+            <img (click)="utilsSvc.goto('home')"  [src]="this.athSvc.user?.photoURL" alt="mdo" width="32" height="32" class="rounded-circle">
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>

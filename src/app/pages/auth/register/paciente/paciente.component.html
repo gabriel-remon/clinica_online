@@ -1,0 +1,29 @@
+
+<app-back path="auth/register"></app-back> 
+
+<div class="container text-center">
+    <div class="row">
+      <div class="col-md-7">
+        <h2>formulario de registro</h2>
+        <app-form class="register" tipo="paciente" [datoIngreso]="obraSocial" pathExito="auth"></app-form>
+      </div>
+      <div class="col-md-4">
+        <h4  *ngIf="!obraSocial">Seleccione una obra social de la lista obra social</h4>
+        <ng-container *ngIf="obraSocial">
+          <h4>Obra social</h4>
+        <app-item class="obra social" [obraSocial]="obraSocial"></app-item>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+
+          <h3>lista de obras sociales</h3>
+          <app-tabla class="obra social" (heladoElegido)="seleccionar($event)"></app-tabla>
+
+        
+      </div>
+    </div>
+    
+  </div>
