@@ -5,29 +5,30 @@
 <div class="container text-center">
     <div class="contenedor">
         <div class="row">
-            <div class="col">
-                <app-perfil></app-perfil>
+            <div class="col elemento perfil shadow">
+                <app-perfil [usuario]="user" (activarEdicion)="edicion = !edicion"></app-perfil>
             </div>
-            <div class="col">
-                <app-listado-especialidades></app-listado-especialidades>
+            <div class="col-lg-4  " *ngIf="user?.rol == 'especialista'">
+                <app-listado-especialidades [listaEspecialidades]="user.especialidades" [editable]="edicion"></app-listado-especialidades>
             </div>
-            <div class="col">
-                <app-item-obra-social  *ngIf="obraSocial"></app-item-obra-social>
+            <div class=" col-lg-2" *ngIf="user?.rol == 'paciente'">
+                <app-item-obra-social *ngIf="obraSocial"></app-item-obra-social>
             </div>
         </div>
 
-        <ng-container>
-            <div class="row">
-                <app-tabla-especialidad></app-tabla-especialidad>
+        <ng-container *ngIf="user?.rol == 'especialista'">
+            <div class="row  horario perfil shadow">
+                <h3>Horarios del especialista</h3>
+                <app-horario-especialista></app-horario-especialista>
             </div>
             <div class="row">
-                <app-horario-especialista></app-horario-especialista>
+                <app-tabla-especialidad *ngIf="edicion"></app-tabla-especialidad>
             </div>
         </ng-container>
         
-        <ng-container>
+        <ng-container *ngIf="user?.rol == 'paciente'">
             <div class="row">
-                <app-tabla-obra-social></app-tabla-obra-social>
+                <app-tabla-obra-social *ngIf="edicion"></app-tabla-obra-social>
             </div>
             <div class="row">
                 <app-historal-paciente></app-historal-paciente>

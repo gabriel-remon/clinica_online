@@ -5,16 +5,25 @@
         <div class="row elemento perfil shadow">
             <app-perfil-min></app-perfil-min>
         </div>
-        <div class="row elemento carrucel shadow">
+        <div class="row elemento carrucel shadow" *ngIf="usuarioLogin.rol == 'admin' || usuarioLogin.rol == 'paciente'">
             <app-carrusel-especialidades></app-carrusel-especialidades>
         </div>
-        <div class="row boton border border-black shadow" (click)="utilsSvc.goto('home/usuarios')">
+        <div class="row boton border border-black shadow"  *ngIf="usuarioLogin.rol == 'admin' "(click)="utilsSvc.goto('home/usuarios')">
             <p> USUARIOS</p>
+        </div>
+        <div class="row boton border border-black shadow" *ngIf="usuarioLogin.rol == 'paciente' " (click)="utilsSvc.goto('home/turnos/paciente')">
+            <p> MIS TURNOS</p>
+        </div>
+        <div class="row boton border border-black shadow" *ngIf="usuarioLogin.rol == 'especialista' "  (click)="utilsSvc.goto('home/turnos/especialista')">
+            <p> MIS TURNOS</p>
+        </div>
+        <div class="row boton border border-black shadow" *ngIf="usuarioLogin.rol == 'admin' " (click)="utilsSvc.goto('home/turnos/admin')">
+            <p> TURNOS</p>
         </div>
         <div class="row boton border border-black shadow" (click)="utilsSvc.goto('home/turnos')">
             <p> MIS TURNOS</p>
         </div>
-        <div class="row boton border border-black shadow" (click)="utilsSvc.goto('home/pacientes')">
+        <div class="row boton border border-black shadow" *ngIf="usuarioLogin.rol == 'especialista' " (click)="utilsSvc.goto('home/pacientes')">
             <p> PACIENTES</p>
         </div>
     </div>

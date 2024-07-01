@@ -1,0 +1,19 @@
+
+
+.elemento,.boton,.horario{
+
+    align-items: center;
+    text-align: center;
+    background-color: #e6d378;
+    border-radius: 20px;
+}
+
+.horario{
+    margin-top: 30px;
+    padding: 20px;
+}
+
+h3{
+    font-size: 30px;
+    text-decoration: underline;
+}

@@ -25,7 +25,6 @@ export class TablaObraSocialComponent {
     if(!this.obra_sociales){
       this.obraSocialSvc.getData(obraSocial =>{
         this.obra_sociales = obraSocial
-        console.log(obraSocial)
       })
     }
   }
