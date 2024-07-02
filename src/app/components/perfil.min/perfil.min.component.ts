@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 import { UtilService } from '../../core/services/util.service';
 import { AuthService } from '../../core/services/auth.service';
 import { User } from '../../core/models/user.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-perfil-min',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './perfil.min.component.html',
   styleUrl: './perfil.min.component.css'
 })

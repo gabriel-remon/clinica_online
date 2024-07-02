@@ -33,4 +33,9 @@ export class HeaderComponent {
 
     })
   }
+
+  cerrarSecion(){
+    this.utilsSvc.goto('auth')
+    this.athSvc.logout()
+  }
 }

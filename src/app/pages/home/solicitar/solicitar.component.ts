@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TablaEspecialidadesComponent } from '../../../components/tablas/tabla.especialidades/tabla.especialidades.component';
 import { HeaderComponent } from '../../../components/header/header.component';
+import { Especialidad } from '../../../core/models/especialidades.model';
+import { UtilService } from '../../../core/services/util.service';
 
 @Component({
   selector: 'app-solicitar',
@@ -11,4 +13,10 @@ import { HeaderComponent } from '../../../components/header/header.component';
 })
 export class SolicitarComponent {
 
+  utilSvc = inject(UtilService)
+
+  seleccionar(item:Especialidad){
+    this.utilSvc.goto('home/solicitar/',item.id)
+    console.log(item)
+  }
 }

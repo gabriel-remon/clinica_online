@@ -34,16 +34,28 @@ export class ListadoEspecialidadesComponent {
     }
   }
   ngOnChanges(){
-    if(this.especialidaIn){
-      if(!this.especialidades.includes(this.especialidaIn)){
-        this.especialidades.push(this.especialidaIn)
-        this.toastSvc.success("Especialidad agregada")
-        this.enviarEspecialidades()
-      }else{
-        this.toastSvc.error("Ya posee esta especialidad")
+    if (this.especialidaIn) {
+      // Verificar si la especialidad ya existe en el array
+      const especialidadExiste = this.especialidades.some(especialidad => especialidad.nombre === this.especialidaIn?.nombre);
+      
+      // Verificar si el id del item no está incluido en ninguno de los items del array
+      const idExiste = this.especialidades.some(especialidad => especialidad.id === this.especialidaIn?.id);
+    
+      if (!especialidadExiste && !idExiste) {
+        this.especialidades.push(this.especialidaIn);
+        this.toastSvc.success("Especialidad agregada");
+        this.enviarEspecialidades();
+      } else {
+        if (especialidadExiste) {
+          this.toastSvc.error("Ya posee esta especialidad");
+        } else if (idExiste) {
+          this.toastSvc.error("El id de la especialidad ya está en uso");
+        }
       }
-      this.especialidaIn = null
+    
+      this.especialidaIn = null;
     }
+    
   }
 
   eliminarItem(especialida: Especialidad) {

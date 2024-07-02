@@ -13,6 +13,7 @@ import { AuthService } from '../../../core/services/auth.service';
 import { User } from '../../../core/models/user.model';
 import { CommonModule } from '@angular/common';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'page-perfil',
@@ -31,6 +32,9 @@ export class PerfilPage {
   spinnerSvc = inject(NgxSpinnerService)
   user!:User;
   edicion:boolean = false
+  toastSvc = inject(ToastrService)
+
+  especialidad!:Especialidad
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -42,9 +46,34 @@ export class PerfilPage {
       this.spinnerSvc.show()
     }
     this.authSvc.user$.subscribe(data=>{
+      console.log(data)
       this.spinnerSvc.hide()
       this.user = data
       console.log(data)
     })
+  }
+
+  editar(){
+    if(this.edicion){
+      this.spinnerSvc.show()
+      this.authSvc.updateData(this.user).then((data)=>{
+        this.spinnerSvc.hide()
+        if(data.estado){
+          this.toastSvc.success(data.mensaje)
+        }else{
+          this.toastSvc.error(data.mensaje)
+        }
+      })
+    }
+    this.edicion = !this.edicion
+    console.log(this.edicion)
+  }
+
+  cambioHorario(){
+    console.log(this.user)
+  }
+
+  selecEspecialidad(item:Especialidad){
+    this.especialidad =item
   }
 }

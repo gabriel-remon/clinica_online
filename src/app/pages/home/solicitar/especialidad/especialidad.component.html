@@ -1,1 +1,7 @@
 <app-header></app-header>
+
+
+<app-tabla-especialista 
+[especialistas]="especialistas"
+(especialidadSelect)="tomarTurno($event)"
+></app-tabla-especialista>

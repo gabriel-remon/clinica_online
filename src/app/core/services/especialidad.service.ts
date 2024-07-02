@@ -51,13 +51,13 @@ export class EspecialidadService {
 
  async  updateData(helado:Especialidad){
 
-  const retorno :any = {mensaje:"error el crear el helado",estado:false}
+  const retorno :any = {mensaje:"error el crear una especialidad",estado:false}
   
   try{
     const document = doc(this.dbFirebase,this.tabla,helado.id)
     await updateDoc(document,{ ...helado})
     retorno.estado = true
-    retorno.mensaje = "helado modificado con exito"
+    retorno.mensaje = "epecialidad modificado con exito"
     return retorno
   }catch(err){
     retorno.mensaje = err
@@ -100,4 +100,9 @@ export class EspecialidadService {
     });
     return retorno
   }
+
+
+
+
+  
 }

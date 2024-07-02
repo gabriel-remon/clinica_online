@@ -1,4 +1,6 @@
+import { Time } from "@angular/common";
 import { Especialidad } from "./especialidades.model";
+import { ObraSocial } from "./obra.social.model";
 
 
 export interface User{
@@ -10,12 +12,19 @@ export interface User{
     fecha_nacimiento:string,
     foto_perfil:string,
     rol: "admin"|"especialista" | "paciente",
-
+    horario :Horarios[] |null
     //atributos del especialista
     especialidades:Especialidad[]|null,
     especialista_valido:boolean|null,
     
     //atributos del paciente
-    id_obra_social:string|null,
+    obra_social:ObraSocial|null,
     foto_paciente:string|null,
+}
+
+export type Horarios ={
+    dia:string,
+    hora_inicio:Time,
+    hora_fin:Time,
+    activo:boolean
 }

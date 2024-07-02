@@ -18,7 +18,8 @@ export class TablaEspecialidadesComponent {
 
   @Output() especialidadSelect = new EventEmitter<Especialidad>();
 
-  @Input()obra_sociales! : Especialidad[] |[];
+  @Input() obra_sociales! : Especialidad[] |[];
+  @Input() agregar : boolean=true;
   EspecialidadSvc = inject(EspecialidadService)
   dialog= inject(MatDialog)
   spinerSvc = inject(NgxSpinnerService)

@@ -1,5 +1,6 @@
 import { CommonModule, Time } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { User } from '../../core/models/user.model';
 
 @Component({
   selector: 'app-horario-especialista',
@@ -10,6 +11,11 @@ import { Component } from '@angular/core';
 })
 export class HorarioEspecialistaComponent {
 
+  
+  @Output() especialidadesActuales = new EventEmitter<any>();
+
+  @Input() usuario!:User;
+  @Input() editable:boolean = false;
 
   horarios: any = [
     {
@@ -112,8 +118,21 @@ export class HorarioEspecialistaComponent {
     }
   ]
 
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    console.log(this.usuario)
+    if(!this.usuario.horario){
+      this.usuario.horario= this.horarios
+    }
+  }
+
   seleccionar(item:any){
-    item.activo = !item.activo
+    console.log(this.editable)
+    if(this.editable){
+      item.activo = !item.activo
+      this.especialidadesActuales.emit()
+    }
   }
   convertirHora(hora: { hours: number; minutes: number }): string {
     const horas = this.padZero(hora.hours);

@@ -10,7 +10,7 @@ import { ObraSocial } from '../../../core/models/obra.social.model';
 })
 export class ItemObraSocialComponent {
 
-  @Input() obraSocial:ObraSocial ={
+  @Input() obraSocial:ObraSocial|null ={
     id:"aa",
     nombre:"test",
     src_foto:"s"

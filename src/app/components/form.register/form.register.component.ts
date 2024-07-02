@@ -131,6 +131,7 @@ export class FormRegisterComponent {
       dni: this.form.value.dni as string,
       fecha_nacimiento: this.form.value.nacimiento as string,
       rol: this.tipo,
+      horario:null
     }
     if (this.tipo != "admin") {
       this.spinner.show();

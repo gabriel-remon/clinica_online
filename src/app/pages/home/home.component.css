@@ -3,11 +3,9 @@
     height:550px;
 }
 
-.elemento{
-    height: 38%;
 
-}
 .elemento,.boton{
+    margin: auto;
     margin-top: 20px;
     
     align-items: center;

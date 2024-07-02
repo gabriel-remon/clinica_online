@@ -15,7 +15,7 @@
                             <li class="mb-2 mb-xl-3 display-28"><span
                                     class="display-26 text-secondary me-2 font-weight-600">Email:</span>{{userLogin?.email}}
                             </li>
-                            <li class="mb-2 mb-xl-3 display-28"><span
+                            <li class="mb-2 mb-xl-3 display-28" *ngIf="userLogin.rol == 'especialista'"><span
                                     class="display-26 text-secondary me-2 font-weight-600">Cantidad de especialidades:</span>{{userLogin?.especialidades?.length}}</li>
                             <li class="mb-2 mb-xl-3 display-28">
                                 <button (click)="utilSvc.goto('home/perfil')" class="btn btn-info   mt-4 fw-semibold shadow-sm">

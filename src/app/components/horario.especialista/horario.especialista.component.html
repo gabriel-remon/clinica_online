@@ -9,11 +9,11 @@
                             <div>
                                 <div class="dato">
                                     <label for="nombre">Hora inicio</label>
-                                    <input type="time" class="form-control" [value]="convertirHora(item.hora_inicio)">
+                                    <input type="time" class="form-control" [value]="convertirHora(item.hora_inicio) "  [readOnly]="!editable">
                                 </div>
                                 <div class=" dato">
                                     <label for="nombre">Hora fin</label>
-                                    <input type="time" class="form-control" [value]="convertirHora(item.hora_fin)">
+                                    <input type="time" class="form-control" [value]="convertirHora(item.hora_fin)" [readOnly]="!editable">
                                 </div>
                             </div>
                         </div>

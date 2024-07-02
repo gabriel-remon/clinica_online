@@ -4,7 +4,7 @@ import { Auth, signInWithEmailAndPassword, onAuthStateChanged, createUserWithEma
 import { ToastrService } from 'ngx-toastr';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Observable, Subject, from } from 'rxjs';
-import { Firestore, QueryDocumentSnapshot, QuerySnapshot, addDoc, collection, getFirestore, where, query, onSnapshot, doc, setDoc, getDoc, getDocs } from '@angular/fire/firestore';
+import { Firestore, QueryDocumentSnapshot, QuerySnapshot, addDoc, collection, getFirestore, where, query, onSnapshot, doc, setDoc, getDoc, getDocs, updateDoc } from '@angular/fire/firestore';
 import { User } from '../models/user.model';
 import { getDownloadURL, getStorage, ref, uploadBytes } from '@angular/fire/storage';
 
@@ -232,7 +232,21 @@ export class AuthService {
     }
   }
 
+  async  updateData(usuario:User){
 
+    const retorno :any = {mensaje:"error el crear una usuario",estado:false}
+    
+    try{
+      const document = doc(this.dbFirebase,this.bdUsuarios,usuario._id)
+      await updateDoc(document,{ ...usuario})
+      retorno.estado = true
+      retorno.mensaje = "usuario modificado con exito"
+      return retorno
+    }catch(err){
+      retorno.mensaje = err
+      return retorno
+    }
+    }
 
 
   //cambia el mensaje de erorr de firebase por uno personalizado
