@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {ChangeDetectionStrategy, Component, inject, model, signal} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
@@ -12,12 +11,10 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { MatIcon } from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
-import { Encuesta } from '../../../core/models/encuesta.model';
 
 @Component({
-  selector: 'app-encuesta',
+  selector: 'app-comentario',
   standalone: true,
   imports: [
     MatFormFieldModule,
@@ -28,24 +25,14 @@ import { Encuesta } from '../../../core/models/encuesta.model';
     MatDialogContent,
     MatDialogActions,
     MatDialogClose,
-    MatIcon,
-    CommonModule
   ],
-  templateUrl: './encuesta.component.html',
-  styleUrl: './encuesta.component.css'
+  templateUrl: './comentario.component.html',
+  styleUrl: './comentario.component.css'
 })
-export class EncuestaComponent {
-
-  readonly dialogRef = inject(MatDialogRef<EncuestaComponent>);
-
-  encuesta:Encuesta={
-    instalaciones:true,
-    precio:true,
-    tiempo_espera:true,
-    observacion:""
-  }
-
+export class ComentarioComponent {
+  readonly dialogRef = inject(MatDialogRef<ComentarioComponent>);
+  texto:string|undefined
   onNoClick(): void {
-    this.dialogRef.close(this.encuesta);
+    this.dialogRef.close(this.texto);
   }
 }

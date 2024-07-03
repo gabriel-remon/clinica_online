@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Comentarios</h2>
+<mat-dialog-content>
+  <p>Escriba su comentario de la consulta?</p>
+  <mat-form-field>
+    <mat-label>Comentario:</mat-label>
+    <input matInput [(ngModel)]="texto" />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Aceptar</button>
+</mat-dialog-actions>

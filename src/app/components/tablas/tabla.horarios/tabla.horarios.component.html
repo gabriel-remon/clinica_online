@@ -1,1 +1,24 @@
-<p>tabla.horarios works!</p>
+<div class="container text-center contenedor shadow">
+
+
+        <h1>Seleccione un dia</h1>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 ">
+            <ng-container *ngFor="let item of horarios">
+
+                <div class="col " (click)="seleccionar(item)">
+                    <div class="card tarjeta shadow" >
+                        <div class="card-body contenedorCard">
+                            <h5 class="card-title">Turnos del dia:</h5>
+                            <div class="card-body">
+                              <p>dia: {{ obtenerDia(item)}}</p>
+                              <p>mes: {{ item.toLocaleDateString('es-ES', { month: 'long' }).toLowerCase()}}</p>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+
+        </div>
+
+</div>

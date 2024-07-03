@@ -1,0 +1,33 @@
+.rating {
+    display: flex;
+  }
+  
+  mat-icon {
+    cursor: pointer;
+    color: #d3d3d3; /* Color de estrellas vacías */
+  }
+  
+  mat-icon.full-star {
+    color: #ffca28; /* Color de estrellas llenas */
+  }
+  
+  mat-icon.half-star {
+    color: #ffca28; /* Color de media estrella */
+    background: linear-gradient(90deg, #ffca28 50%, #d3d3d3 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  button{
+    margin: auto;
+  }
+  .contenedor{
+    text-align: center;
+    align-items: center;
+
+  }
+  p{
+    font-size: 1em;
+    margin: 0;
+  }
+  

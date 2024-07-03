@@ -17,15 +17,20 @@ input{
     margin:auto
 }
 
+.sacarBot{
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+h5{
+    margin: 0;
+}
 .tarjeta{
-    width:250px !important;
+    width:180px !important;
     background-color: #e6d378;
     margin: 20px ;
 }
-button{
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
+
 .seleccionada{
     background-color: lawngreen;
 }
@@ -43,15 +48,3 @@ img{
     height: 100px;
     border-radius: 50%;
 }
-
-mat-icon {
-    color: #e6d378; /* Color de estrellas vacías */
-    padding: 0;
-    margin-right:5px ;
-    margin-left: 5px;
-  }
-  
-  mat-icon.full-star {
-    color: #2b3ba1; /* Color de estrellas llenas */
-  }
-  

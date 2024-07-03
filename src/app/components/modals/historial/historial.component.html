@@ -1,0 +1,107 @@
+<div class="contenedor">
+    <h2 mat-dialog-title>Historal medico</h2>
+    <mat-dialog-content>
+        <form class="needs-validation contenedor" (submit)="submit()" [formGroup]="this.form">
+            <div class="row g-3 datos">
+                <div class="form-floating">
+                    <input type="number" class="form-control" id="altura" placeholder="altura" [formControl]="form.controls.altura">
+                    <label for="altura">altura (cm):</label>
+                    <div class="text-danger" *ngIf="form.get('altura')?.touched">
+                        <label *ngIf="form.controls.altura.getError('required')">altura requerido</label>
+                        <label *ngIf="form.controls.altura.getError('min')">Altura minima de 30cm</label>
+                        <label *ngIf="form.controls.altura.getError('max')">Altura maxima de 300cm</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3 datos">
+                <div class="form-floating">
+                    <input type="number" class="form-control" id="peso" placeholder="peso" [formControl]="form.controls.peso">
+                    <label for="peso">Peso (kg):</label>
+                    <div class="text-danger" *ngIf="form.get('peso')?.touched">
+                        <label *ngIf="form.controls.peso.getError('required')">peso requerido</label>
+                        <label *ngIf="form.controls.peso.getError('min')">Peso minimo de 0.1kg</label>
+                        <label *ngIf="form.controls.peso.getError('max')">Peso maximo de 200kg</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3 datos">
+                <div class="form-floating">
+                    <input type="number" class="form-control" id="presion" placeholder="presion" [formControl]="form.controls.presion">
+                    <label for="presion">Presion (cm):</label>
+                    <div class="text-danger" *ngIf="form.get('presion')?.touched">
+                        <label *ngIf="form.controls.presion.getError('required')">presion requerido</label>
+                        <label *ngIf="form.controls.presion.getError('min')">Presion minima de 50 puntos</label>
+                        <label *ngIf="form.controls.presion.getError('max')">Presion maxima de 150 puntos </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3 datos">
+                <div class="form-floating">
+                    <input type="number" class="form-control" id="temperatura" placeholder="temperatura" [formControl]="form.controls.temperatura">
+                    <label for="temperatura">temperatura (cm):</label>
+                    <div class="text-danger" *ngIf="form.get('temperatura')?.touched">
+                        <label *ngIf="form.controls.temperatura.getError('required')">Temperatura requerido</label>
+                        <label *ngIf="form.controls.temperatura.getError('min')">Temperatura minima de 30°c</label>
+                        <label *ngIf="form.controls.temperatura.getError('max')">Temperatura maxima de 45°C</label>
+                    </div>
+                </div>
+            </div>
+
+            <h4 (click)="valor1=true" *ngIf="!valor1"><mat-icon>add</mat-icon> Agregar dato</h4>
+            <ng-container *ngIf="valor1">
+                <div class="row g-3 datos">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="clave1" placeholder="clave1" [formControl]="form.controls.clave1">
+                        <label for="clave1">clave:</label>
+                    </div>
+                </div>
+                <div class="row g-3 datos">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="valor1" placeholder="valor1" [formControl]="form.controls.valor1">
+                        <label for="valor1">valor:</label>
+                    </div>
+                </div>
+
+                <h4 (click)="valor2=true" *ngIf="!valor2"><mat-icon>add</mat-icon> Agregar dato</h4>
+                <ng-container *ngIf="valor2">
+                    <div class="row g-3 datos">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="clave2" placeholder="clave2" [formControl]="form.controls.clave2">
+                            <label for="clave2">clave:</label>
+                        </div>
+                    </div>
+                    <div class="row g-3 datos">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="valor2" placeholder="valor2" [formControl]="form.controls.valor2">
+                            <label for="valor2">valor:</label>
+                        </div>
+                    </div>
+
+                    <h4 (click)="valor3=true" *ngIf="!valor3"><mat-icon>add</mat-icon> Agregar dato</h4>
+                    <ng-container *ngIf="valor3">
+                        <div class="row g-3 datos">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="clave3" placeholder="clave3" [formControl]="form.controls.clave3">
+                                <label for="clave3">clave:</label>
+                            </div>
+                        </div>
+                        <div class="row g-3 datos">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="valor3" placeholder="valor3" [formControl]="form.controls.valor3">
+                                <label for="valor3">valor:</label>
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </ng-container>
+            
+
+                
+            <mat-dialog-actions>
+                <button class="w-100 btn btn-primary btn-lg" type="" [disabled]="!form.valid">
+                    Cargar historial
+                </button>
+            </mat-dialog-actions>
+        </form>
+    </mat-dialog-content>
+</div>

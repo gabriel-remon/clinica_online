@@ -1,7 +1,12 @@
 <app-header></app-header>
 
 
-<app-tabla-especialista 
+<app-tabla-especialista *ngIf="!especialista" 
 [especialistas]="especialistas"
-(especialidadSelect)="tomarTurno($event)"
+(especialidadSelect)="SeleccionarEspecialista($event)"
 ></app-tabla-especialista>
+
+<app-tabla-horarios *ngIf="especialista" 
+    [horarios]="dias"
+    (horarioSelect)="tomarTurno($event)"
+></app-tabla-horarios>

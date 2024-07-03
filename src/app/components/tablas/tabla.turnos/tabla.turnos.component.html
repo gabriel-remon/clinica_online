@@ -1,1 +1,93 @@
-<p>tabla.turnos works!</p>
+<div class="container text-center contenedor shadow">
+
+    <ng-container *ngIf="turnos.length == 0">
+        <h1>No hay ningun turno registrado</h1>
+    </ng-container>
+
+    <ng-container *ngIf="turnos.length != 0">
+
+        <h1>Lista de turnos</h1>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 ">
+            <ng-container *ngFor="let item of turnos">
+
+                <div class="col " (click)="seleccionar(item)" [id]="item.id">
+                    <div class="card tarjeta shadow">
+                        <div class="card-body contenedorCard">
+                            <h5 class="card-title">fecha: {{item.dia.toLocaleDateString('es-ES', { day: 'numeric',
+                                month:
+                                'numeric' })}}</h5>
+                            <div class="card-body">
+                                <p>horario: {{item.hora_inicio.hours}}:{{item.hora_inicio.minutes}} </p>
+                                <h3>estado: <strong>{{item.estado}}</strong></h3>
+                                <div class="circulo">
+                                    <img [src]="item.especialidad.src_foto" alt="">
+                                </div>
+                                <h2>especialidad: {{item.especialidad.nombre}}</h2>
+                                <p>Especialista: {{item.especialista.nombre}} {{item.especialista.apellido}}</p>
+                                <p>Paciente: {{item.paciente.nombre}} {{item.paciente.apellido}}</p>
+
+
+                                <button type="button" class="row btn btn-primary" (click)="verResenia(item)"
+                                    *ngIf="item.comentario">
+                                    Ver reseña
+                                </button>
+                                <button type="button" class="row btn btn-primary" (click)="cancelarTurno(item)"
+                                    *ngIf="item.estado !== 'pendiente' &&  item.estado !== 'realizado' && item.estado !== 'rechazado'&& item.estado !== 'cancelado' && rol == 'admin'">
+                                    Cancelar turno
+                                </button>
+
+                                <ng-container *ngIf="rol == 'especialista'">
+                                    <button type="button" class="row btn btn-primary" (click)="cancelarTurno(item)"
+                                        *ngIf=" item.estado !== 'pendiente' &&  item.estado !== 'realizado' && item.estado !== 'rechazado'&& item.estado !== 'cancelado'">
+                                        Cancelar turno
+                                    </button>
+                                    <button type="button" class="row btn btn-primary" (click)="rechazarTurno(item)"
+                                        *ngIf="item.estado !== 'aceptado' && item.estado !== 'realizado' && item.estado !== 'cancelado'&& item.estado !== 'rechazado'">
+                                        Rechazar turno
+                                    </button>
+                                    <button type="button" class="row btn btn-primary" (click)="aceptarTurno(item)"
+                                        *ngIf="item.estado !== 'realizado' && item.estado !== 'cancelado' && item.estado !== 'rechazado'&& item.estado !== 'aceptado'">
+                                        Aceptar turno
+                                    </button>
+                                    <button type="button" class="row btn btn-primary" (click)="finalizarTurno(item)"
+                                        *ngIf="item.estado =='aceptado'">
+                                        Finalizar turno
+                                    </button>
+                                    <button type="button" class="row btn btn-primary" (click)="cargarHistorial(item)"
+                                        *ngIf="item.estado =='realizado' && !item.historia_clinica">
+                                        Cargar historial
+                                    </button>
+
+                                </ng-container>
+
+                                <ng-container *ngIf="rol == 'paciente'">
+                                    <button type="button" class="row btn btn-primary" (click)="cancelarTurno(item)"
+                                        *ngIf="item.estado =='pendiente'">
+                                        Cancelar turno
+                                    </button>
+                                    <button type="button" class="row btn btn-primary" (click)="completarEncuesta(item)"
+                                        *ngIf="item.estado =='realizado' && item.atencion && !item.encuesta">
+                                        Completar encuesta
+                                    </button>
+                                    <button type="button" class="row btn btn-primary" (click)="calificar(item)"
+                                        *ngIf="item.estado =='realizado' && !item.atencion ">
+                                        Calificar atencion
+                                    </button>
+                                </ng-container>
+
+                                <div class="row centrado" *ngIf="item.atencion">
+                                    <mat-icon *ngFor="let star of stars; let i = index"
+                                        [ngClass]="{ 'full-star': i < item.atencion}">
+                                        star
+                                    </mat-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+
+        </div>
+    </ng-container>
+
+</div>

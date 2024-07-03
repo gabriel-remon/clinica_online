@@ -1,0 +1,19 @@
+<div class="contenedor">
+    <h2 mat-dialog-title>Calificacion del turno</h2>
+    <p>(califique su atencion con una </p>
+    <p> valoracion del 1 al 5 estrellas)</p>
+
+    <mat-dialog-content>
+        <div class="rating">
+            <mat-icon *ngFor="let star of stars; let i = index"
+             [ngClass]="{ 'full-star': i < rating}"
+            (mouseover)="hoverRating(i + 1)" (mouseleave)="resetRating()" (click)="rate(i +1)">
+                star
+            </mat-icon>
+        </div>
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Aceptar</button>
+    </mat-dialog-actions>
+</div>

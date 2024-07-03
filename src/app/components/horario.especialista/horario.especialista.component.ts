@@ -27,7 +27,7 @@ export class HorarioEspecialistaComponent {
       },
       hora_fin:
       {
-        hours: 10,
+        hours: 15,
         minutes: 10
       },
       activo:true
@@ -41,13 +41,13 @@ export class HorarioEspecialistaComponent {
       },
       hora_fin:
       {
-        hours: 10,
+        hours: 13,
         minutes: 10
       },
       activo:true
     },
     {
-      dia: "miercoles",
+      dia: "miércoles",
       hora_inicio:
       {
         hours: 10,
@@ -55,7 +55,7 @@ export class HorarioEspecialistaComponent {
       },
       hora_fin:
       {
-        hours: 10,
+        hours: 15,
         minutes: 10
       },
       activo:true
@@ -69,10 +69,10 @@ export class HorarioEspecialistaComponent {
       },
       hora_fin:
       {
-        hours: 10,
+        hours: 16,
         minutes: 10
       },
-      activo:true
+      activo:false
     },
     {
       dia: "viernes",
@@ -83,13 +83,13 @@ export class HorarioEspecialistaComponent {
       },
       hora_fin:
       {
-        hours: 10,
+        hours: 15,
         minutes: 10
       },
-      activo:false
+      activo:true
     },
     {
-      dia: "sabado",
+      dia: "sábado",
       hora_inicio:
       {
         hours: 10,
@@ -97,10 +97,10 @@ export class HorarioEspecialistaComponent {
       },
       hora_fin:
       {
-        hours: 10,
+        hours: 16,
         minutes: 10
       },
-      activo:true
+      activo:false
     },
     {
       dia: "domingo",
@@ -111,7 +111,7 @@ export class HorarioEspecialistaComponent {
       },
       hora_fin:
       {
-        hours: 10,
+        hours: 15,
         minutes: 10
       },
       activo:false

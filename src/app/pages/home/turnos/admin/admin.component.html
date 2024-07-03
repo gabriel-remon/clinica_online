@@ -1,1 +1,23 @@
 <app-header></app-header>
+
+<div class="row contenedor">
+
+    <div class="col-4">
+        <button type="button" class="row btn btn-primary" (click)="filtrarEspecialidad()">
+            Filtrar por Especialidad
+        </button> 
+    </div>
+    <div class="col-4 " >
+
+            <button type="button" class="row btn btn-primary" (click)="filtrarEspecialista()">
+                Filtrar por especialista
+            </button> 
+    </div>
+</div>
+
+<div *ngIf="turnos.length>0">
+    <app-tabla-turnos
+    rol="admin"
+    [turnos]="turnos">
+    </app-tabla-turnos>
+</div>

@@ -1,0 +1,23 @@
+<div class="container text-center contenedor shadow">
+
+
+    <h1>Seleccione un horario</h1>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 ">
+        <ng-container *ngFor="let item of horarios">
+
+            <div class="col " (click)="seleccionar(item)">
+                <div class="card tarjeta shadow" >
+                    <div class="card-body contenedorCard sacarBot">
+                        <h5 class="card-title">Turnos del dia:</h5>
+                        <div class="card-body">
+                          <p>hora ingreso:  {{ item.hora_inicio.hours}}:{{ item.hora_inicio.minutes}}</p>
+                          <p class="sacarBot">duracion: 30 min</p>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+    </div>
+
+</div>

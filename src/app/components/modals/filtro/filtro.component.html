@@ -1,0 +1,25 @@
+<div class="container text-center contenedor shadow">
+
+
+    <h1>Seleecione un filtro</h1>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 ">
+        <ng-container *ngFor="let item of horarios">
+
+            <div class="col " (click)="seleccionar(item)">
+                <div class="card tarjeta shadow" >
+                    <div class="card-body contenedorCard sacarBot">
+                        <h5 class="card-title">{{item.nombre}}</h5>
+                        <div class="card-body">
+                            <div class="circulo">
+                                <img *ngIf="item.foto" [src]="item.foto" alt="">
+                                <img *ngIf="item.src_foto" [src]="item.src_foto" alt="">
+                            </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+    </div>
+
+</div>

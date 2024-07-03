@@ -1,1 +1,53 @@
-<p>encuesta works!</p>
+<div class="contenedor">
+    <h2 mat-dialog-title>Encuesta de satisfaccion</h2>
+    <mat-dialog-content>
+        <div class="rating">
+            <div class="row">
+                <div class="col-6">
+                    Instalaciones: 
+                </div>
+                <div class="col">
+                    <mat-icon  [ngClass]="{ 'selec-mal': !encuesta.instalaciones}" (click)="encuesta.instalaciones = false">
+                        sentiment_dissatisfied</mat-icon>
+                </div>
+                <div class="col"  >
+                    <mat-icon [ngClass]="{ 'selec': encuesta.instalaciones}" (click)="encuesta.instalaciones = true">mood</mat-icon>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    Precio: 
+                </div>
+                <div class="col">
+                    <mat-icon  [ngClass]="{ 'selec-mal': !encuesta.precio}" (click)="encuesta.precio = false">
+                        sentiment_dissatisfied</mat-icon>
+                </div>
+                <div class="col"  >
+                    <mat-icon [ngClass]="{ 'selec': encuesta.precio}" (click)="encuesta.precio = true">mood</mat-icon>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    Tiempo de espera: 
+                </div>
+                <div class="col">
+                    <mat-icon  [ngClass]="{ 'selec-mal': !encuesta.tiempo_espera}" (click)="encuesta.tiempo_espera = false">
+                        sentiment_dissatisfied</mat-icon>
+                </div>
+                <div class="col"  >
+                    <mat-icon [ngClass]="{ 'selec': encuesta.tiempo_espera}" (click)="encuesta.tiempo_espera = true">mood</mat-icon>
+                </div>
+            </div>
+
+            <div class="row">
+                <label for="">Observaciones</label>
+                <input type="text" [value]="encuesta.observacion">
+            </div>
+        </div>
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Aceptar</button>
+    </mat-dialog-actions>
+</div>

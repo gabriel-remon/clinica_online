@@ -104,7 +104,7 @@ export class AuthService {
             if (data.especialista_valido) {
               this.rol = data.rol
               this.userLogin = data;
-              this.userSubject.next(res.user);
+              this.userSubject.next(data);
               this.toastSVC.success("usuario logueado con exito", "Bienvenido")
               if (calback) calback()
             } else {
