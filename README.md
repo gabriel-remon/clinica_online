@@ -30,4 +30,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 # Paginas
 ### Login
-<span>![</span><span>Aquí la descripción de la imagen por si no carga</span><span>]</span><span>(</span><span>https://github.com/gabriel-remon/clinica_online/blob/main/src/assets/pantalla/login-1.JPG</span><span>)</span>
+<span>![</span><span>Aquí la descripción de la imagen por si no carga</span><span>]</span><span>(</span><span>![https://github.com/gabriel-remon/clinica_online/blob/main/src/assets/pantalla/admin-1.JPG](https://github.com/gabriel-remon/clinica_online/blob/main/src/assets/pantalla/login-1.JPG)</span><span>)</span>
