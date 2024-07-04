@@ -18,9 +18,9 @@ Se administra todo el proceso que imprica pedir un turno como la creacion del mi
 ## Configuraciones
 
 Se deberan cargar las claver privadas de firebase y de google captcha en los dos de la carpeta 'environments', con el siguiente formato:
-environment = {
-    firebase:{
-        "projectId": "",
+<p>environment = {</p>
+<p>    firebase:{</p>
+<p>        "projectId": "",</p>
         "appId": ":",
         "databaseURL": "",
         "storageBucket": "",
