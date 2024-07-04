@@ -157,3 +157,7 @@ Si se desea subir el proyecto al hosting de firebase debe rear una cuenta en fir
 <p> El registro de especialistas y pacientes es exactamente igual al registro que aparece al inicio de la aplicacion</p>
 
 <span>Formulario para registrar un administrador</span><span>![https://github.com/gabriel-remon/clinica_online/blob/main/src/assets/pantalla/admin10.JPG](https://github.com/gabriel-remon/clinica_online/blob/main/src/assets/pantalla/admin10.JPG)</span>
+
+## Ejemplo de historial medico
+
+<span>Forma del archivo pdf del historial medico</span><span>![https://github.com/gabriel-remon/clinica_online/blob/main/src/assets/pantalla/ejemplo-historial.PDF](https://github.com/gabriel-remon/clinica_online/blob/main/src/assets/pantalla/ejemplo-historial.PDF)</span>
