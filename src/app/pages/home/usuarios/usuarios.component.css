@@ -14,7 +14,10 @@
   .half {
     height: 100vh;
   }
-
+.separar{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
   img{
     height: 100%;
     width: 100%;

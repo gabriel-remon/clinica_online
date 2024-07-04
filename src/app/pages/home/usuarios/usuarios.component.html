@@ -8,24 +8,34 @@
                 <app-listado-usuarios></app-listado-usuarios>
             </div>
         </div>
-        <div class="row">
+        
+       
+        <div class="row separar">
             <h2>Registro de usuario</h2>
             <div class="col">
                 <div class="circle" (click)="utilSvc.goto('home/usuarios/especialista')">
-                    <img src="assets/especialista.png" >
+                    <img src="assets/especialista.png">
                 </div>
             </div>
             <div class="col">
                 <div class="circle" (click)="utilSvc.goto('home/usuarios/paciente')">
-                    <img src="assets/paciente.png" >
+                    <img src="assets/paciente.png">
                 </div>
             </div>
             <div class="col">
                 <div class="circle" (click)="utilSvc.goto('home/usuarios/admin')">
-                    <img src="assets/admin.png" >
+                    <img src="assets/admin.png">
                 </div>
             </div>
         </div>
-       
+    </div>
+    <div class="row separar">
+        <h1>Historiales de pacientes </h1>
+        <div>
+
+            <app-tabla-pacientes (especialidadSelect)="seleccionar($event)"
+                [especialistas]="pacientes"></app-tabla-pacientes>
+
+        </div>
     </div>
 </div>

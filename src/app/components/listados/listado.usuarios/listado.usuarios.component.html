@@ -49,11 +49,11 @@
                                 <div class="fht-cell"></div>
                             </th>
                             <th data-field="country">
-                                <div class="th-inner sortable both">Rol</div>
+                                <div class="th-inner sortable both">Cuenta</div>
                                 <div class="fht-cell"></div>
                             </th>
                             <th data-field="city">
-                                <div class="th-inner ">Cuenta</div>
+                                <div class="th-inner ">Rol</div>
                                 <div class="fht-cell"></div>
                             </th>
                             <th data-field="actions">
@@ -69,7 +69,8 @@
                                 <td>{{item.nombre}} {{item.apellido}}</td>
                                 <td>{{item.dni}}    </td>
                                 <td>{{calcularEdad(item.fecha_nacimiento)}}</td>
-                                <td>{{item?.especialista_valido?'Habilitada':'Bloqueada'}}</td>
+                                <td *ngIf="item.rol == 'especialista'">{{item?.especialista_valido?'Habilitada':'Bloqueada'}}</td>
+                                <td *ngIf="item.rol != 'especialista'">Habilitada</td>
                                 <td>{{item.rol}}</td>
                                 <td>
                                     <ng-container *ngIf="item?.rol=='especialista'">

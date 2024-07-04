@@ -17,4 +17,8 @@ export const routes: Routes = [
         path: 'paciente',
         loadComponent : ()=> import('./paciente/paciente.component').then(m=>m.PacienteComponent)
     },
+    {
+        path: 'historial/:id',
+        loadComponent : ()=> import('./historial/historial.component').then(m=>m.HistorialUseresComponent)
+    },
 ];
