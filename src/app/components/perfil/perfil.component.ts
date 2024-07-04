@@ -14,6 +14,7 @@ export class PerfilComponent {
   utilSvc = inject(UtilService)
   edicion:boolean=false
   @Input() usuario! :User;
+  @Input() editable :boolean=true;
   @Output() activarEdicion = new EventEmitter<void>();
   foto:any
   ngOnInit(): void {

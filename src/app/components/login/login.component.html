@@ -16,10 +16,12 @@
       <label *ngIf="form.controls.email.getError('email')">email invalido</label>
     </div>
     <div class="input-group mt-1">
-      <div class="input-group-text bg-info">
-        <i class="bi bi-lock-fill"></i>
+      <div class="input-group-text bg-info" (click)="mostrarPassword = !mostrarPassword">
+        <i class="bi " 
+            [ngClass]="{'bi-lock-fill' : !mostrarPassword, 'bi-unlock-fill' : mostrarPassword}"
+            ></i>
       </div>
-      <input class="form-control bg-light" type="password" placeholder="Contraseña"
+      <input class="form-control bg-light" type="{{mostrarPassword?'text':'password'}}" placeholder="Contraseña"
         [formControl]="form.controls.password" />
     </div>
     <div class="text-danger" *ngIf="form.get('password')?.touched">

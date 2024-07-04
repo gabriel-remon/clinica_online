@@ -32,7 +32,7 @@
                                     Ver reseña
                                 </button>
                                 <button type="button" class="row btn btn-primary" (click)="cancelarTurno(item)"
-                                    *ngIf="item.estado !== 'pendiente' &&  item.estado !== 'realizado' && item.estado !== 'rechazado'&& item.estado !== 'cancelado' && rol == 'admin'">
+                                    *ngIf="  item.estado !== 'realizado' && item.estado !== 'rechazado'&& item.estado !== 'cancelado' && rol == 'admin'">
                                     Cancelar turno
                                 </button>
 

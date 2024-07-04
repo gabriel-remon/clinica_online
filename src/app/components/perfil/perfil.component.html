@@ -6,7 +6,7 @@
                 <img class="border shadow border-black" [src]="usuario?.foto_perfil" alt="...">
             </div>
         </ng-container>
-        <ng-container *ngIf="usuario.rol == 'paciente'">
+        <ng-container *ngIf="usuario.rol == 'paciente' || usuario.rol == 'admin'">
             <div class="col" (click)="cambiarFoto()">
                 <img class="border shadow border-black" [src]="foto"  alt="...">
             </div>
@@ -43,7 +43,7 @@
                         class="display-26 text-secondary me-2 font-weight-600">Edad:</span>{{calcularEdad(usuario.fecha_nacimiento)}} años
                 </li>
 
-                <li class="mb-2 mb-xl-3 display-28">
+                <li class="mb-2 mb-xl-3 display-28" *ngIf="editable">
                     <button class="btn btn-info   mt-4 fw-semibold shadow-sm" (click)="editar()">
                         {{edicion?'Confirmar':'Editar'}}
                          

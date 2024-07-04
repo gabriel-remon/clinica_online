@@ -69,7 +69,7 @@
                 </div>
             </div>
         </div>
-
+        <re-captcha formControlName="recaptchaReactive"></re-captcha>
         <button class="btn btn-primary w-100 py-2" type="submit" [disabled]="!form.valid">Registrarse</button>
         <p *ngIf="registro" class="mt-5 mb-3 text-body-secondary">Ya esta registrado? <strong (click)="utilSvc.goto(pathRegistro)"> ingrese aqui</strong></p>
     </form>

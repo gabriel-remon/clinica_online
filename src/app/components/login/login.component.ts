@@ -18,6 +18,9 @@ export class LoginComponent {
   @Input() pathExito!:string;
   @Input() usuario!:any;
 
+
+  mostrarPassword:boolean = false
+
   toast = inject(ToastrService)
   spinner = inject(NgxSpinnerService)
   authFirebase = inject(AuthService)

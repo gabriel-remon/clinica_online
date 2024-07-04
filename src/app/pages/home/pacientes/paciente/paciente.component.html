@@ -5,7 +5,7 @@
     <div class="contenedor" *ngIf="paciente">
         <div class="row">
             <div class="col elemento perfil shadow">
-                <app-perfil [usuario]="paciente" ></app-perfil>
+                <app-perfil [usuario]="paciente" [editable]="false"></app-perfil>
             </div>
             <div class=" col-lg-4" *ngIf="paciente?.rol == 'paciente'">
                 <app-item-obra-social *ngIf="paciente.obra_social" [obraSocial]="paciente.obra_social"></app-item-obra-social>

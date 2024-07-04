@@ -8,5 +8,9 @@ export const environment = {
         "apiKey": "AIzaSyCJPPQyu0uVi3tYo3N0gY141Kn4BFZ6yN0",
         "authDomain": "clinica-online-5e1cf.firebaseapp.com",
         "messagingSenderId": "602937129959"
-      }
+      },
+      captchaGoogle:{
+        passwordWeb: "6LceSAgqAAAAAEnqQxh9R2Q08gpZm449fgVMNRZe",
+        secretPassword:"6LceSAgqAAAAAIM2Jf9LQXKEoyS_l7I2KnQFsgpW"
+    }
 };

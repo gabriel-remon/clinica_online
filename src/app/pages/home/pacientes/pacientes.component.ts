@@ -35,8 +35,14 @@ export class PacientesComponent {
           //@ts-ignore
           data[i].dia= data[i].dia.toDate()
         }
-        console.log(data)
-          this.usuarios = this.obtenerPacientesUnicos(data)
+        const arrayId = this.obtenerPacientesUnicos(data)
+
+        this.authSvc.getData(usuarios=>{
+          this.spinerSvc.hide()
+          const idsSet = new Set(arrayId.map(obj => obj.id));
+  
+          this.usuarios = usuarios.filter(item => idsSet.has(item._id));
+        })
       })
     }else{
       this.spinerSvc.show()

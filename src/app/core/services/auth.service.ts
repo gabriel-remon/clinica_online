@@ -114,7 +114,7 @@ export class AuthService {
           } else {
 
             this.rol = data.rol
-            this.userSubject.next(res.user);
+            this.userSubject.next(data);
             this.toastSVC.success("usuario logueado con exito", "Bienvenido")
             if (calback) calback()
             }

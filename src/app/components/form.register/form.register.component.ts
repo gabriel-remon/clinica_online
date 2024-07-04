@@ -8,11 +8,14 @@ import { AuthService } from '../../core/services/auth.service';
 import { UtilService } from '../../core/services/util.service';
 import { CommonModule } from '@angular/common';
 import { User } from '../../core/models/user.model';
+import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-form-register',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule,ReactiveFormsModule,
+    RecaptchaModule,RecaptchaFormsModule],
   templateUrl: './form.register.component.html',
   styleUrl: './form.register.component.css'
 })
@@ -47,6 +50,7 @@ export class FormRegisterComponent {
       especialidad:new FormControl('', ),
       obra_social:new FormControl('', ),
       foto_paciente:new FormControl('', ),
+      recaptchaReactive:new FormControl('',Validators.required)
     });
     
 
@@ -107,6 +111,11 @@ export class FormRegisterComponent {
     if (file) {
       this.imagenPaciente = file
     }
+  }
+
+
+  resolved(captchaResponse: any) {
+    console.log(`Resolved captcha with response: ${captchaResponse}`);
   }
 
   async submit() {
