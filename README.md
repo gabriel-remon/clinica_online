@@ -18,9 +18,11 @@ Se administra todo el proceso que imprica pedir un turno como la creacion del mi
 ## Configuraciones
 
 Se deberan cargar las claver privadas de firebase y de google captcha en los dos de la carpeta 'environments', con el siguiente formato:
-<p>environment = {</p>
-<p>    firebase:{</p>
-<p>        "projectId": "",</p>
+
+```typescript
+environment = {
+    firebase:{
+        "projectId": "",
         "appId": ":",
         "databaseURL": "",
         "storageBucket": "",
@@ -34,6 +36,7 @@ Se deberan cargar las claver privadas de firebase y de google captcha en los dos
         secretPassword:""
     }
 };
+```
 
 Luego de cargar estos datos de debera ejecutar los comandos :
 - `npm install`: Para instalar todos los paquetes npm
