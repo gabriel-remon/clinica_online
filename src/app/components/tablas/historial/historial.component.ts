@@ -274,7 +274,7 @@ export class HistorialComponent {
             body: [
               [
                 {
-                  text: 'DESCRIPTION',
+                  text: 'DESCRIPCION',
                   fillColor: '#eaf2f5',
                   border: [false, true, false, true],
                   margin: [0, 5, 0, 5],
