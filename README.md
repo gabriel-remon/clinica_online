@@ -160,4 +160,4 @@ Si se desea subir el proyecto al hosting de firebase debe rear una cuenta en fir
 
 ## Ejemplo de historial medico
 
-<span>Forma del archivo pdf del historial medico</span><span>![https://github.com/gabriel-remon/clinica_online/blob/main/src/assets/pantalla/ejemplo-historial.PDF](https://github.com/gabriel-remon/clinica_online/blob/main/src/assets/pantalla/ejemplo-historial.PDF)</span>
+<span>Forma del archivo pdf del historial medico</span><span>![https://github.com/gabriel-remon/clinica_online/blob/main/src/assets/pantalla/ejemplo-historial.PDF](https://github.com/gabriel-remon/clinica_online/blob/main/src/assets/pantalla/ejemplo-historial.PNG)</span>
