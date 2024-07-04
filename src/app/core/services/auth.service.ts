@@ -232,6 +232,25 @@ export class AuthService {
     }
   }
 
+  getDataId(idUsuario:string,funcion:(repartidores:User)=>void,finaly?:()=>void) {
+    // Crear una consulta ordenada por el campo 'fecha' en orden ascendente
+    const mensajeRef = collection(this.dbFirebase,this.bdUsuarios)
+    const q = query(mensajeRef,where("_id","==",idUsuario))
+    
+    try{
+      return onSnapshot(q,(snapshot:QuerySnapshot)=>{
+        snapshot.forEach((doc:QueryDocumentSnapshot)=>{
+          let repartidorIn =  doc.data() as User
+          funcion(repartidorIn)
+        })
+        finaly?finaly():""
+      })
+    }catch(error){
+      finaly?finaly():""
+      return error
+    }
+  }
+
   async  updateData(usuario:User){
 
     const retorno :any = {mensaje:"error el crear una usuario",estado:false}

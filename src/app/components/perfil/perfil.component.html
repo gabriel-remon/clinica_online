@@ -1,8 +1,19 @@
 <div class="card-body contenedor">
     <div class="row align-items-center">
-        <div class="col">
-            <img class="border shadow border-black" [src]="usuario?.foto_perfil" alt="...">
-        </div>
+        
+        <ng-container *ngIf="usuario.rol == 'especialista'">
+            <div class="col">
+                <img class="border shadow border-black" [src]="usuario?.foto_perfil" alt="...">
+            </div>
+        </ng-container>
+        <ng-container *ngIf="usuario.rol == 'paciente'">
+            <div class="col" (click)="cambiarFoto()">
+                <img class="border shadow border-black" [src]="foto"  alt="...">
+            </div>
+        </ng-container>
+        
+
+
         <div class="col">
             <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded nombre">
                 <h3 class="h2 text-white mb-0"> <input class="col" type="text"readonly value={{usuario?.nombre}}>

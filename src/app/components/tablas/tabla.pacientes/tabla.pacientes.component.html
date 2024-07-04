@@ -1,1 +1,31 @@
-<p>tabla.pacientes works!</p>
+<div class="container text-center contenedor shadow">
+
+    <ng-container *ngIf="especialistas.length == 0">
+        <h1>No tiene ningun paciente</h1>
+    </ng-container>
+
+    <ng-container *ngIf="especialistas.length != 0">
+        
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 ">
+            <ng-container *ngFor="let item of especialistas">
+
+                <div class="col " (click)="seleccionar(item)" [id]="item._id">
+                    <div class="card tarjeta shadow" >
+                        <div class="card-body contenedorCard">
+                            <h5 class="card-title">{{item.nombre}} {{item.apellido}}</h5>
+                            <div class="card-body">
+                                <div class="circulo">
+                                    <img [src]="item.foto_perfil" alt="">
+                                </div>
+                                <p>Edad: {{calcularEdad(item.fecha_nacimiento)}} años</p>
+                                <p>Email: {{item.email}} </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+
+        </div>
+    </ng-container>
+
+</div>

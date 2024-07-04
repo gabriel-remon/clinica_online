@@ -31,7 +31,9 @@
                 <app-tabla-obra-social (heladoElegido)="user.obra_social = $event" *ngIf="edicion"></app-tabla-obra-social>
             </div>
             <div class="row">
-                <app-historal-paciente></app-historal-paciente>
+                <h2 *ngIf="turnos.length==0">No hay ningun historial medico</h2>
+                <app-tabla-historial *ngIf="turnos.length!=0"
+                [turnos]="turnos"></app-tabla-historial>
             </div>
         </ng-container>
         

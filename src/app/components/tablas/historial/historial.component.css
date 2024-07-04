@@ -8,6 +8,7 @@ input{
 
 }
 .contenedor{
+    margin-top: 20px;
     border-radius: 20px;
     background-color: #78dfe0;
 }
@@ -22,7 +23,10 @@ input{
     background-color: #e6d378;
     margin: 20px ;
 }
-
+button{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 .seleccionada{
     background-color: lawngreen;
 }
@@ -34,9 +38,24 @@ h5{
     font-size: 20px;
     text-decoration: underline;
 }
+h1{
+    margin-top: 30px;
+}
 
 img{
     width: 100px;
     height: 100px;
     border-radius: 50%;
 }
+
+mat-icon {
+    color: #e6d378; /* Color de estrellas vacías */
+    padding: 0;
+    margin-right:5px ;
+    margin-left: 5px;
+  }
+  
+  mat-icon.full-star {
+    color: #2b3ba1; /* Color de estrellas llenas */
+  }
+  

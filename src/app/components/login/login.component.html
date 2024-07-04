@@ -1,59 +1,41 @@
-<div
-      class="bg-white p-5 rounded-5 text-secondary shadow"
-      style="width: 24rem"
-    >
-    <div class="d-flex justify-content-center">
-        <img
-        src="/assets/logo.png"
-        alt="login-icon"
-        style="height: 9rem"
-        />
-    </div>
-    <div class="text-center fs-1 fw-bold">MEDICOS</div>
-    <form (submit)="submit()" [formGroup]="this.form" >
-      
-      <div class="input-group mt-4">
-        <div class="input-group-text bg-info">
-            <i class="bi bi-person-circle"></i>
-        </div>
-        <input
-          class="form-control bg-light"
-          type="text"
-          placeholder="Email"
-          [formControl]="form.controls.email"
-        />
-      </div>
-      <div class="text-danger col" *ngIf="form.get('email')?.touched">
-        <label *ngIf="form.controls.email.getError('required')">email requerido</label>
-        <label *ngIf="form.controls.email.getError('email')">email invalido</label>
-    </div>
-      <div class="input-group mt-1">
-        <div class="input-group-text bg-info">
-            <i class="bi bi-lock-fill"></i>
-        </div>
-        <input
-          class="form-control bg-light"
-          type="password"
-          placeholder="Contraseña"
-          [formControl]="form.controls.password"
-        />
-      </div>
-      <div class="text-danger" *ngIf="form.get('password')?.touched">
-        <label *ngIf="form.controls.password.getError('required')">contraseña requerida</label>
-        <label *ngIf="form.controls.password.getError('minlength')">la contraseña debe tener minimo 5 letras</label>
-    </div>
-      
-      <button [disabled]="!form.valid" class="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm">
-        Inicio de secion
-      </button>
+<div class="bg-white p-5 rounded-5 text-secondary shadow" style="width: 24rem">
+  <div class="d-flex justify-content-center">
+    <img src="/assets/logo.png" alt="login-icon" style="height: 9rem" />
+  </div>
+  <div class="text-center fs-1 fw-bold">MEDICOS</div>
+  <form (submit)="submit()" [formGroup]="this.form">
 
-      </form>
-
-      <div class="d-flex gap-1 justify-content-center mt-1">
-        <div>Aun no tienes una cuenta?</div>
-        <a class="text-decoration-none text-info fw-semibold" (click)="utilsSvc.goto('auth/register')"
-          >Registrate</a
-        >
+    <div class="input-group mt-4">
+      <div class="input-group-text bg-info">
+        <i class="bi bi-person-circle"></i>
       </div>
-      
+      <input class="form-control bg-light" type="text" placeholder="Email" [formControl]="form.controls.email" />
     </div>
+    <div class="text-danger col" *ngIf="form.get('email')?.touched">
+      <label *ngIf="form.controls.email.getError('required')">email requerido</label>
+      <label *ngIf="form.controls.email.getError('email')">email invalido</label>
+    </div>
+    <div class="input-group mt-1">
+      <div class="input-group-text bg-info">
+        <i class="bi bi-lock-fill"></i>
+      </div>
+      <input class="form-control bg-light" type="password" placeholder="Contraseña"
+        [formControl]="form.controls.password" />
+    </div>
+    <div class="text-danger" *ngIf="form.get('password')?.touched">
+      <label *ngIf="form.controls.password.getError('required')">contraseña requerida</label>
+      <label *ngIf="form.controls.password.getError('minlength')">la contraseña debe tener minimo 5 letras</label>
+    </div>
+
+    <button [disabled]="!form.valid" class="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm">
+      Inicio de sesion
+    </button>
+
+  </form>
+
+  <div class="d-flex gap-1 justify-content-center mt-1">
+    <div>Aun no tienes una cuenta?</div>
+    <a class="text-decoration-none text-info fw-semibold" (click)="utilsSvc.goto('auth/register')">Registrate</a>
+  </div>
+
+</div>

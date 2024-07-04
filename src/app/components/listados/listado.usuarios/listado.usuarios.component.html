@@ -73,7 +73,7 @@
                                 <td>{{item.rol}}</td>
                                 <td>
                                     <ng-container *ngIf="item?.rol=='especialista'">
-                                        <div class="" *ngIf="item?.especialista_valido">
+                                        <div class="" *ngIf="item?.especialista_valido" (click)="cambiarEstado(item)">
                                             <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="cancel"></mat-icon>
                                             <samp>Bloquear</samp>
                                         </div>

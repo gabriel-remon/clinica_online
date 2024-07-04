@@ -86,6 +86,7 @@ export class EspecialidadComponent {
           if(dia.dia == element.toLocaleDateString('es-ES', { weekday: 'long' }).toLowerCase() && dia.activo){
             this.dias.push(element)
           }
+         
         })
       });
     }
@@ -93,11 +94,12 @@ export class EspecialidadComponent {
   }
 
   tomarTurno(horario: any) {
+
     if (this.especialista.horario) {
       const turnosDisponibles = this.generarTurnosDisponibles(new Date(horario), this.especialista.horario)
      
       //modal para pedir turno 
-
+      
 
       const dialogRef = this.dialog.open(HoraTurnoComponent, {
         
@@ -207,11 +209,16 @@ export class EspecialidadComponent {
 
 
   generarTurnosDisponibles(fecha: Date, horario: Horarios[]): any[] {
+
+    this.turnosSvc.turnoDeEspecialista(this.especialista._id,(data)=>{
+      console.log(fecha.toLocaleDateString('es-ES', { weekday: 'long' }))
+
+    })
+
     const turnos: any[] = [];
     const diaSemana = fecha.toLocaleDateString('es-ES', { weekday: 'long' }).toLowerCase();
     const horarioSlect = horario.find(horario => horario.dia.toLowerCase() === diaSemana.toLowerCase());
-    console.log(diaSemana)
-    console.log(horarioSlect)
+
     if (!horarioSlect || !horarioSlect.activo) {
       return turnos;
     }
@@ -250,6 +257,9 @@ export class EspecialidadComponent {
       horaActual = { ...horaFinTurno };
     }
 
+
+    console.log(horario)
+    console.log(turnos)
     return turnos;
   }
   /*

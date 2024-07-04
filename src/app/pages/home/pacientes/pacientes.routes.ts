@@ -6,7 +6,7 @@ export const routes_pacientes: Routes = [
         loadComponent: ()=> import('./pacientes.component').then(m=>m.PacientesComponent)
     },
     {
-        path: 'idpaciente',
+        path: ':id',
         loadComponent : ()=> import('./paciente/paciente.component').then(m=>m.PacienteComponent)
     },
 ];

@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 import { User } from '../../core/models/user.model';
 
 @Component({
-  selector: 'app-form.register',
+  selector: 'app-form-register',
   standalone: true,
   imports: [CommonModule,ReactiveFormsModule],
   templateUrl: './form.register.component.html',
@@ -142,7 +142,8 @@ export class FormRegisterComponent {
           especialista_valido: false
         } 
 
-      } else {
+      }
+       if (this.tipo == "paciente")  {
         newUser = {
           ...newUser,
           obra_social: this.datoIngreso

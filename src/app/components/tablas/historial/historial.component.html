@@ -1,0 +1,43 @@
+<div class="container text-center contenedor shadow">
+
+
+    <h1>Historiales medicos</h1>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 ">
+        <ng-container *ngFor="let item of turnos">
+            <ng-container *ngIf="item.historia_clinica">
+                <div class="col ">
+                    <div class="card tarjeta shadow">
+                        <div class="card-body contenedorCard">
+                            <h5 class="card-title">historal medico:</h5>
+                            <div class="card-body">
+
+                                <p>Especialidad: {{item.especialidad.nombre}} </p>
+                                <p>Especialista: {{item.especialista.nombre}} {{item.especialista.apellido}}</p>
+                                <p>Altura: {{item.historia_clinica?.altura}} cm </p>
+                                <p>Peso: {{item.historia_clinica?.altura}} Kg </p>
+                                <p>Temperatura: {{item.historia_clinica?.altura}} °C </p>
+                                <p>Presion: {{item.historia_clinica?.altura}} puntos </p>
+
+                                <ng-container
+                                    *ngIf="item.historia_clinica &&item.historia_clinica.datos_dinamicos && item.historia_clinica.datos_dinamicos.length>0">
+                                    <ng-container *ngFor="let dato  of item.historia_clinica?.datos_dinamicos">
+                                        <p>{{dato.clave}}: {{dato.valor}} </p>
+                                    </ng-container>
+                                </ng-container>
+
+
+
+                                <!--
+                                <p>dia: {{ obtenerDia(item)}}</p>
+                                <p>mes: {{ item.toLocaleDateString('es-ES', { month: 'long' }).toLowerCase()}}</p>
+                                -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+
+    </div>
+
+</div>

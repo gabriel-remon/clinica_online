@@ -14,13 +14,16 @@ import { User } from '../../../core/models/user.model';
 import { CommonModule } from '@angular/common';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { HistorialComponent } from '../../../components/tablas/historial/historial.component';
+import { TurnoService } from '../../../core/services/turno.service';
+import { Turno } from '../../../core/models/turno.model';
 
 @Component({
   selector: 'page-perfil',
   standalone: true,
   imports: [PerfilComponent,ListadoEspecialidadesComponent,TablaEspecialidadesComponent,
     HorarioEspecialistaComponent,HistoralPacienteComponent,TablaObraSocialComponent,
-    HeaderComponent,ItemObraSocialComponent,CommonModule
+    HeaderComponent,ItemObraSocialComponent,CommonModule,HistorialComponent
   ],
   templateUrl: './perfil.component.html',
   styleUrl: './perfil.component.css'
@@ -30,10 +33,11 @@ export class PerfilPage {
   especialidades : Especialidad[]|null=null
   authSvc = inject(AuthService)
   spinnerSvc = inject(NgxSpinnerService)
+  turnosSvc = inject(TurnoService)
   user!:User;
   edicion:boolean = false
   toastSvc = inject(ToastrService)
-
+  turnos:Turno[] = []
   especialidad!:Especialidad
 
   ngOnInit(): void {
@@ -41,6 +45,14 @@ export class PerfilPage {
     //Add 'implements OnInit' to the class.
     if(this.authSvc.userLogin){
       this.user = this.authSvc.userLogin
+      this.turnosSvc.turnoDePaciente(this.user._id,data=>{
+
+        for(let i =0;i<data.length;i++){
+          //@ts-ignore
+          data[i].dia= data[i].dia.toDate()
+        }
+        this.turnos =data
+      })
     }  else{
 
       this.spinnerSvc.show()
@@ -49,7 +61,14 @@ export class PerfilPage {
       console.log(data)
       this.spinnerSvc.hide()
       this.user = data
-      console.log(data)
+      this.turnosSvc.turnoDePaciente(this.user._id,data=>{
+
+        for(let i =0;i<data.length;i++){
+          //@ts-ignore
+          data[i].dia= data[i].dia.toDate()
+        }
+        this.turnos =data
+      })
     })
   }
 

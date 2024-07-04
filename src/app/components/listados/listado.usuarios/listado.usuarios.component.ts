@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import { AuthService } from '../../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
+import { User } from '../../../core/models/user.model';
 
 @Component({
   selector: 'app-listado-usuarios',
@@ -47,8 +48,9 @@ export class ListadoUsuariosComponent {
     return edad;
   }
   
-  cambiarEstado(especialista:any){
-    console.log(especialista)
+  cambiarEstado(especialista:User){
+    especialista.especialista_valido = !especialista.especialista_valido
+    this.authSvc.updateData(especialista)
   }
 
 
