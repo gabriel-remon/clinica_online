@@ -16,6 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TurnoService } from '../../../../core/services/turno.service';
 import { UtilService } from '../../../../core/services/util.service';
 import { ToastrService } from 'ngx-toastr';
+import { FitroPacienteComponent } from '../../../../components/modals/fitro-paciente/fitro-paciente.component';
 
 @Component({
   selector: 'app-especialidad',
@@ -114,7 +115,7 @@ export class EspecialidadComponent {
             return
           }
           horarioSelect= result 
-          if(this.userLogin.rol == "paciente"){
+        
             const turno={
               dia:horario,
               especialidad:{
@@ -133,12 +134,17 @@ export class EspecialidadComponent {
               hora_fin:turnosDisponibles[0].hora_fin,
               id:"",
               paciente:{
-                id:this.userLogin._id,
-                nombre:this.userLogin.nombre,
-                apellido:this.userLogin.apellido,
-                foto: this.userLogin.foto_perfil
+                id:"",
+                nombre:"",
+                apellido:"",
+                foto: ""
               }
             }
+            if(this.userLogin.rol == "paciente"){
+              turno.paciente.id = this.userLogin._id
+              turno.paciente.nombre = this.userLogin.nombre
+              turno.paciente.apellido = this.userLogin.apellido
+              turno.paciente.foto = this.userLogin.foto_perfil
             this.spinerSvc.show()
 
             this.turnosSvc.newData(turno as Turno).then(res=>{
@@ -151,6 +157,31 @@ export class EspecialidadComponent {
              this.toastSvc.error(err.mensaje)
              //console.log(err)
             }).finally(()=>this.spinerSvc.hide())
+          }else{
+
+            const dialogRefPaciente = this.dialog.open(FitroPacienteComponent);
+            dialogRefPaciente.afterClosed().subscribe(result => {
+              if(result){
+                turno.paciente.id = result._id
+                turno.paciente.nombre = result.nombre
+                turno.paciente.apellido = result.apellido
+                turno.paciente.foto = result.foto_perfil
+              this.spinerSvc.show()
+  
+              this.turnosSvc.newData(turno as Turno).then(res=>{
+                this.toastSvc.success(res.mensaje)
+                this.utilSvc.goto('home')
+                //this.spinerSvc.show()
+                console.log(res)
+              }).catch(err=>{
+                
+               this.toastSvc.error(err.mensaje)
+               //console.log(err)
+              }).finally(()=>this.spinerSvc.hide())
+              }else{
+                this.toastSvc.error("debe seleccionar un paciente para asignarle el turno")
+              }
+            })
           }
         });
         
@@ -258,8 +289,7 @@ export class EspecialidadComponent {
     }
 
 
-    console.log(horario)
-    console.log(turnos)
+
     return turnos;
   }
   /*

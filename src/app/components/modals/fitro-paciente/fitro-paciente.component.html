@@ -1,0 +1,28 @@
+<div class="container text-center contenedor shadow">
+
+    <ng-container *ngIf="pacientes.length == 0">
+        <h1>No tiene ningun paciente</h1>
+    </ng-container>
+    
+    <ng-container *ngIf="pacientes.length != 0">
+        
+        <div class="row ">
+            <h1>Seleecione un paciente</h1>
+            <ng-container *ngFor="let item of pacientes">
+
+                <div class="col " (click)="seleccionar(item)" [id]="item._id">
+                    <div class="circulo">
+                        <img [src]="item.foto_perfil" alt="">
+                        <div class="bg-dark text-light titulo">
+                            <p>{{item.nombre}} {{item.apellido}}</p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </ng-container>
+
+        </div>
+    </ng-container>
+
+</div>

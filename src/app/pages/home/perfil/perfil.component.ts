@@ -58,7 +58,6 @@ export class PerfilPage {
       this.spinnerSvc.show()
     }
     this.authSvc.user$.subscribe(data=>{
-      console.log(data)
       this.spinnerSvc.hide()
       this.user = data
       this.turnosSvc.turnoDePaciente(this.user._id,data=>{

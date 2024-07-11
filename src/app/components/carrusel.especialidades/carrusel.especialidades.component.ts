@@ -22,10 +22,8 @@ export class CarruselEspecialidadesComponent {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class
-    console.log('hola')
     this.spinnerSvc.show()
     this.especialidadesSvc.getData(data=>{
-      console.log(data)
       this.spinnerSvc.hide()
       this.especialidades = data
       

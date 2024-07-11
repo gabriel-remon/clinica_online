@@ -32,9 +32,9 @@ input{
 }
 .titulo{
     z-index: 999;
+    transform: translateY(-50px);
     width: 70%;
     margin: auto;
-    margin-top: 20px;
     border-radius: 10px;
 }
 h5{
@@ -42,15 +42,26 @@ h5{
     font-size: 20px;
     text-decoration: underline;
 }
-p{
-    padding-top: 5px;
-    padding-bottom:5px ;
-    padding: 5px;
-}
 
-
-.chart{
+.circulo{
+    width: 200px;
+    height: 200px;
     margin: auto;
-    width: 400px;
-    height: 400px;
+    margin-top: 10px;
+        margin-bottom: 10px;
+    
+    border-radius: 50%;
+    background-color: black;
+    text-align: center;
+    align-items: center;
+
+    overflow: hidden; /* Oculta el contenido que se desborda */
+
+
+}
+img{
+    margin-top: 5px;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
 }

@@ -32,7 +32,6 @@ export class PerfilMinComponent {
 
     this.authSvc.user$.subscribe(data=>{
       this.userLogin=data
-      console.log(this.userLogin.especialidades)
     })
   }
 }

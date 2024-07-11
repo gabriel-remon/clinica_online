@@ -23,7 +23,7 @@ ngOnInit(): void {
 formatoHora(item:any){
   let retorno = ''
 
-  if(item.hora_inicio > 12){
+  if(item.hora_inicio.hours >= 12){
     retorno = (item.hora_inicio.hours-12) + ":"+ item.hora_inicio.minutes + " PM"
   }else{
     retorno = item.hora_inicio.hours + ":"+ item.hora_inicio.minutes + " AM"
