@@ -1,3 +1,8 @@
 img{
     transform: translateY(-30px);
 }
+
+.contenedor{
+    max-width: 500px;
+    margin: auto;
+}

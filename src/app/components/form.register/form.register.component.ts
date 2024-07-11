@@ -49,8 +49,8 @@ export class FormRegisterComponent {
       foto: new FormControl('', ),
       especialidad:new FormControl('', ),
       obra_social:new FormControl('', ),
-      foto_paciente:new FormControl('', ),
-      recaptchaReactive:new FormControl('',Validators.required)
+        foto_paciente:new FormControl('', ),
+        recaptchaReactive:new FormControl('',Validators.required)
     });
     
 

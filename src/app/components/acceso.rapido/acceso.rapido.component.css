@@ -25,3 +25,50 @@
     margin-top: 10px;
   }
   
+
+  .circulo{
+    width: 140px;
+    height: 140px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: black;
+    text-align: center;
+    align-items: center;
+    
+    overflow: hidden; /* Oculta el contenido que se desborda */
+    
+    
+  }
+  img{
+    margin: auto;
+    background-color: white;
+    margin-top: 2.5px;
+    width: 135px;
+    height: 135px;
+}
+
+
+.titulo{
+    z-index: 999;
+    transform: translateY(-50px);
+    width: 70%;
+    margin: auto;
+    border-radius: 10px;
+}
+.top{
+    height: 80%;
+}
+.bot{
+    height: 20%;
+}
+
+.contenedor{
+    background-color: #e6d378;
+    margin: 10px;
+    border: 3px black;
+}
+button{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

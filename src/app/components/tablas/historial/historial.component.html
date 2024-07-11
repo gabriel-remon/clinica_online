@@ -13,10 +13,10 @@
 
                                 <p>Especialidad: {{item.especialidad.nombre}} </p>
                                 <p>Especialista: {{item.especialista.nombre}} {{item.especialista.apellido}}</p>
-                                <p>Altura: {{item.historia_clinica?.altura}} cm </p>
-                                <p>Peso: {{item.historia_clinica?.altura}} Kg </p>
-                                <p>Temperatura: {{item.historia_clinica?.altura}} °C </p>
-                                <p>Presion: {{item.historia_clinica?.altura}} puntos </p>
+                                <p>Altura: {{item.historia_clinica.altura}} cm </p>
+                                <p>Peso: {{item.historia_clinica.peso}} Kg </p>
+                                <p>Temperatura: {{item.historia_clinica.temperatura}} °C </p>
+                                <p>Presion: {{item.historia_clinica.presion}} puntos </p>
 
                                 <ng-container
                                     *ngIf="item.historia_clinica &&item.historia_clinica.datos_dinamicos && item.historia_clinica.datos_dinamicos.length>0">

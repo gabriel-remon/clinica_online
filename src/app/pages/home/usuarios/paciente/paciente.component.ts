@@ -4,11 +4,12 @@ import { ItemObraSocialComponent } from '../../../../components/items/item.obra.
 import { TablaObraSocialComponent } from '../../../../components/tablas/tabla.obra.social/tabla.obra.social.component';
 import { HeaderComponent } from '../../../../components/header/header.component';
 import { ObraSocial } from '../../../../core/models/obra.social.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-paciente',
   standalone: true,
-  imports: [FormRegisterComponent,ItemObraSocialComponent,TablaObraSocialComponent,HeaderComponent],
+  imports: [FormRegisterComponent,ItemObraSocialComponent,TablaObraSocialComponent,HeaderComponent,CommonModule],
   templateUrl: './paciente.component.html',
   styleUrl: './paciente.component.css'
 })

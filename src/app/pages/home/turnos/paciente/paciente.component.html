@@ -3,9 +3,7 @@
 <div class="row contenedor">
 
     <div class="col-4">
-        <button type="button" class="row btn btn-primary" (click)="filtrarEspecialidad()">
-            Filtrar por Especialidad
-        </button> 
+        <input type="text"  (input)="filtroGeneral($event)">
     </div>
     <div class="col-4">
         <button type="button" class="row btn btn-primary" (click)="filtrarEspecialista()">

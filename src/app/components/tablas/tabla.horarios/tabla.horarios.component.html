@@ -10,9 +10,8 @@
                         <div class="card-body contenedorCard">
                             <h5 class="card-title">Turnos del dia:</h5>
                             <div class="card-body">
-                              <p>dia: {{ obtenerDia(item)}}</p>
-                              <p>mes: {{ item.toLocaleDateString('es-ES', { month: 'long' }).toLowerCase()}}</p>
-                               
+                              <p>{{ item.getDate()}} / {{ item.toLocaleDateString('es-ES', {  month: '2-digit' })}}</p>
+                              
                             </div>
                         </div>
                     </div>

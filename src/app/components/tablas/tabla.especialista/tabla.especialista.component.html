@@ -13,13 +13,12 @@
                 <div class="col " (click)="seleccionar(item)" [id]="item._id">
                     <div class="card tarjeta shadow" >
                         <div class="card-body contenedorCard">
-                            <h5 class="card-title">{{item.nombre}} {{item.apellido}}</h5>
                             <div class="card-body">
                                 <div class="circulo">
                                     <img [src]="item.foto_perfil" alt="">
                                 </div>
+                                <h5 class="card-title">{{item.nombre}} {{item.apellido}}</h5>
                                 <p>Edad: {{calcularEdad(item.fecha_nacimiento)}} años</p>
-                                <p>Email: {{item.email}} </p>
                             </div>
                         </div>
                     </div>

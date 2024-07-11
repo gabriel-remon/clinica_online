@@ -1,11 +1,12 @@
 <div class="container text-center d-flex justify-content-center align-items-center vh-100 g-4 ">
-  <div class="row">
-    <div class="col">
+  
+  
+  <div class="col-4">
+    <app-acceso-rapido (seleccionarUsuario)="seleccionar($event)"></app-acceso-rapido>
 
-      <app-login [usuario]="accesoRapido" pathExito="home"></app-login>
-    </div>
-    <div class="col acceso">
-      <app-acceso-rapido (seleccionarUsuario)="seleccionar($event)"></app-acceso-rapido>
-    </div>
+  </div>
+  <div class="col-6">
+
+    <app-login [usuario]="accesoRapido" pathExito="home"></app-login>
   </div>
 </div>

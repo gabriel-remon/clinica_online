@@ -1,8 +1,133 @@
+<div class="container text-center contenedor border border-black"  >
+
+  <div class="row">
+          <div class="col"  (click)="seleccionar('remongabi16@gmail.com','123456')">
+              <div class="circulo">
+              <img [src]="" alt="">
+              <div class="bg-dark text-light titulo">
+                  <p>ESPECIALISTA 1</p>
+              </div>
+   
+            </div>
+          </div>
+          <div class="col"  (click)="seleccionar('remongabi16@gmail.com','123456')">
+              <div class="circulo">
+              <img [src]="" alt="">
+              <div class="bg-dark text-light titulo">
+                  <p>ESPECIALISTA 1</p>
+              </div>
+   
+            </div>
+          </div>
+  </div>
+  <div class="row ">
+          <div class="col"  (click)="seleccionar('gremon120@gmail.com','123456')">
+              <div class="circulo">
+              <img [src]="" alt="">
+              <div class="bg-dark text-light titulo">
+                  <p>PACIENTE 1</p>
+              </div>
+   
+            </div>
+          </div>
+          <div class="col"  (click)="seleccionar('gremon120@gmail.com','123456')">
+              <div class="circulo">
+              <img [src]="" alt="">
+              <div class="bg-dark text-light titulo">
+                  <p>PACIENTE 2</p>
+              </div>
+   
+            </div>
+          </div>
+  </div>
+  <div class="row ">
+          <div class="col"  (click)="seleccionar('gremon120@gmail.com','123456')">
+              <div class="circulo">
+              <img [src]="" alt="">
+              <div class="bg-dark text-light titulo">
+                  <p>PACIENTE 3</p>
+              </div>
+   
+            </div>
+          </div>
+          <div class="col"  (click)="seleccionar('e36020042@gmail.com','123456')">
+              <div class="circulo">
+              <img [src]="" alt="">
+              <div class="bg-dark text-light titulo">
+                  <p>ADMIN</p>
+              </div>
+   
+            </div>
+          </div>
+    
+  </div>
+</div>
+<!--
+
 <div class="d-flex flex-column flex-md-row align-items-center justify-content-center contenedor  shadow">
     <div class="list-group">
         <h1>ACCESO RAPIDO</h1>
-  
-        <a class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true" 
+
+
+
+
+
+      <div class="row">
+        <div class="col">
+          <a class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true" 
+          (click)="seleccionar('remongabi16@gmail.com','123456')">
+            <img src="assets/especialista.png" alt="twbs" width="60" height="60" class="rounded-circle flex-shrink-0">
+            <div class="d-flex gap-2 w-100 justify-content-between">
+              <div>
+                <p class="mb-0 opacity-75">ESPECIALISTA</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col">
+          <a class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true" 
+          (click)="seleccionar('remongabi16@gmail.com','123456')">
+            <img src="assets/especialista.png" alt="twbs" width="60" height="60" class="rounded-circle flex-shrink-0">
+            <div class="d-flex gap-2 w-100 justify-content-between">
+              <div>
+                <p class="mb-0 opacity-75">ESPECIALISTA</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <a class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true" 
+          (click)="seleccionar('gremon120@gmail.com','123456')">
+            <img src="assets/paciente.png" alt="twbs" width="60" height="60" class="rounded-circle flex-shrink-0">
+            <div class="d-flex gap-2 w-100 justify-content-between">
+              <div>
+                <p class="mb-0 opacity-75">PACIENTE</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col">
+          <a class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true" 
+          (click)="seleccionar('gremon120@gmail.com','123456')">
+            <img src="assets/paciente.png" alt="twbs" width="60" height="60" class="rounded-circle flex-shrink-0">
+            <div class="d-flex gap-2 w-100 justify-content-between">
+              <div>
+                <p class="mb-0 opacity-75">PACIENTE</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col">
+          <a class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true" 
         (click)="seleccionar('e36020042@gmail.com','123456')">
           <img src="assets/admin.png" alt="twbs" width="60" height="60" class="rounded-circle flex-shrink-0">
           <div class="d-flex gap-2 w-100 justify-content-between">
@@ -11,23 +136,11 @@
             </div>
           </div>
         </a>
-        <a class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true" 
-        (click)="seleccionar('remongabi16@gmail.com','123456')">
-          <img src="assets/especialista.png" alt="twbs" width="60" height="60" class="rounded-circle flex-shrink-0">
-          <div class="d-flex gap-2 w-100 justify-content-between">
-            <div>
-              <p class="mb-0 opacity-75">ESPECIALISTA</p>
-            </div>
-          </div>
-        </a>
-        <a class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true" 
-        (click)="seleccionar('gremon120@gmail.com','123456')">
-          <img src="assets/paciente.png" alt="twbs" width="60" height="60" class="rounded-circle flex-shrink-0">
-          <div class="d-flex gap-2 w-100 justify-content-between">
-            <div>
-              <p class="mb-0 opacity-75">PACIENTE</p>
-            </div>
-          </div>
-        </a>
+        </div>
+      </div>
+
+
+
+        
     </div>
-  </div>
+  </div>-->
