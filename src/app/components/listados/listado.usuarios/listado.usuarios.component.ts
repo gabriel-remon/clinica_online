@@ -30,7 +30,6 @@ export class ListadoUsuariosComponent {
       for(let i=0; i<data.length;i+=10){
         result.push(data.slice(i,i+10))
       }
-      console.log(result )
      this.usuarios = result
 
     
@@ -56,11 +55,6 @@ export class ListadoUsuariosComponent {
   }
 
   generarexcel(){
-    const data = [
-      { name: 'John', age: 30, city: 'New York' },
-      { name: 'Peter', age: 25, city: 'London' },
-      { name: 'Ana', age: 22, city: 'Berlin' }
-    ];
 
     //@ts-ignore
     const usuariosFiltrados = this.usuarios[0].map(usuario=> ({

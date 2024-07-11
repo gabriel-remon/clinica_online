@@ -5,11 +5,12 @@ import { UtilService } from '../../../core/services/util.service';
 import { TablaPacientesComponent } from '../../../components/tablas/tabla.pacientes/tabla.pacientes.component';
 import { AuthService } from '../../../core/services/auth.service';
 import { User } from '../../../core/models/user.model';
+import { GraficosComponent } from '../../../components/graficos/graficos.component';
 
 @Component({
   selector: 'app-usuarios',
   standalone: true,
-  imports: [ListadoUsuariosComponent,HeaderComponent,TablaPacientesComponent],
+  imports: [ListadoUsuariosComponent,HeaderComponent,TablaPacientesComponent,GraficosComponent],
   templateUrl: './usuarios.component.html',
   styleUrl: './usuarios.component.css'
 })

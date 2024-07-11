@@ -88,6 +88,26 @@ export class AuthService {
 
 
   
+  getDataIngresos(funcion:(repartidores:any[])=>void,finaly?:()=>void) {
+    // Crear una consulta ordenada por el campo 'fecha' en orden ascendente
+    const mensajeRef = collection(this.dbFirebase,this.bdIngresos)
+    const q = query(mensajeRef)
+    
+    try{
+      return onSnapshot(q,(snapshot:QuerySnapshot)=>{
+        let repartidores :any[] =[];
+        snapshot.forEach((doc:QueryDocumentSnapshot)=>{
+          let repartidorIn =  doc.data() 
+          repartidores.push( repartidorIn)
+        })
+        funcion(repartidores)
+        finaly?finaly():""
+      })
+    }catch(error){
+      finaly?finaly():""
+      return error
+    }
+  }
 
   async nuevoIngreso(user: User) {
     
@@ -143,6 +163,7 @@ export class AuthService {
             this.rol = data.rol
             this.userSubject.next(data);
             this.toastSVC.success("usuario logueado con exito", "Bienvenido")
+            this.nuevoIngreso(data)
             if (calback) calback()
           }
           if (finali) finali()
