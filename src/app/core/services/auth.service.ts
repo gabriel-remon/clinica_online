@@ -3,10 +3,12 @@ import { Injectable, inject, OnInit } from '@angular/core';
 import { Auth, signInWithEmailAndPassword, onAuthStateChanged, createUserWithEmailAndPassword, getAuth, signOut, updateProfile, sendEmailVerification } from '@angular/fire/auth';
 import { ToastrService } from 'ngx-toastr';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Observable, Subject, from } from 'rxjs';
+import { Observable, Subject, firstValueFrom, from } from 'rxjs';
 import { Firestore, QueryDocumentSnapshot, QuerySnapshot, addDoc, collection, getFirestore, where, query, onSnapshot, doc, setDoc, getDoc, getDocs, updateDoc } from '@angular/fire/firestore';
 import { User } from '../models/user.model';
 import { getDownloadURL, getStorage, ref, uploadBytes } from '@angular/fire/storage';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +18,12 @@ export class AuthService {
   auth = inject(Auth)
   toastSVC = inject(ToastrService)
   storage = getStorage()
-  userLogin!: User|null;
+  userLogin!: User | null;
   user: any;
   dbFirebase = inject(Firestore)
   rol!: "admin" | "especialista" | "paciente";
   private bdUsuarios = "usuarios"
+  private bdIngresos = "log"
   private userSubject = new Subject<any>(); // Subject to store the user state
   user$: Observable<any>;
 
@@ -34,7 +37,7 @@ export class AuthService {
       (user) => {
         if (user) {
           this.user = user
-          const userLogin = this.getDocument(user.uid).subscribe(data=>{
+          const userLogin = this.getDocument(user.uid).subscribe(data => {
             this.userLogin = data
             this.userSubject.next(data);
           })
@@ -65,7 +68,9 @@ export class AuthService {
 
 
   async guardarFoto(foto: any, path: string) {
+    console.log(path)
     let storageRef = ref(this.storage, path);
+    console.log(storageRef)
     await uploadBytes(storageRef, foto)
     return await getDownloadURL(storageRef)
   }
@@ -77,19 +82,40 @@ export class AuthService {
 
 
     const respuesta = await setDoc(userDocRef, user)
-    /*const respuesta = await addDoc(collection(getFirestore(), this.bdUsuarios), user)/*.then(res => {
-       console.log("hola estoy en el then")
-       console.log(res)
-     }).catch(err => {
-       console.log("hola estoy en el cath")
-       console.log(err)
-     }).finally(()=>{
- 
-       console.log("hola estoy en el finali")
-     })*/
     console.log(respuesta)
     return respuesta
   }
+
+
+  
+
+  async nuevoIngreso(user: User) {
+    
+    const retorno = { mensaje: "error el crear el turno", estado: false }
+    const document = collection(getFirestore(), (this.bdIngresos))
+    const documentRef = doc(document)
+
+    const db = getFirestore();
+    const userDocRef = doc(collection(db, this.bdUsuarios));
+    return setDoc(documentRef, {
+      idUsuario:user._id,
+      nombre:user.nombre,
+      apellido:user.apellido,
+      horaIngreso:new Date(),
+      categoria:user.rol
+    })
+      .then(res => {
+      retorno.estado = true
+      retorno.mensaje = "turno creado con exito"
+      return retorno
+    }).catch(err => {
+      retorno.mensaje = err.message
+      return retorno
+    })
+  }
+
+
+
 
 
   //inicia secion
@@ -98,7 +124,7 @@ export class AuthService {
     await signInWithEmailAndPassword(this.auth, email!, password!).then(async res => {
       if (res.user.emailVerified) {
         this.user = res.user
-        
+
         await this.getDocument(res.user.uid).subscribe((data) => {
           if (data.rol == 'especialista') {
             if (data.especialista_valido) {
@@ -106,6 +132,7 @@ export class AuthService {
               this.userLogin = data;
               this.userSubject.next(data);
               this.toastSVC.success("usuario logueado con exito", "Bienvenido")
+              this.nuevoIngreso(data)
               if (calback) calback()
             } else {
               this.toastSVC.error("No cuenta con una cuenta validada", "Permisos insuficientes")
@@ -117,8 +144,8 @@ export class AuthService {
             this.userSubject.next(data);
             this.toastSVC.success("usuario logueado con exito", "Bienvenido")
             if (calback) calback()
-            }
-        if (finali) finali()
+          }
+          if (finali) finali()
         },)
 
       } else {
@@ -134,32 +161,113 @@ export class AuthService {
     })
   }
 
-  registerAdmin(user: User,password:string, passwordUser: string, foto_perfil: any,funcionExito:()=>void,finaly:()=>void, foto_paciente?: any) {
+  registerAdmin(user: User, password: string, foto_perfil: any, funcionExito: () => void, finaly: () => void, foto_paciente?: any) {
 
-        if (password) {
-          console.log(password)
-          signInWithEmailAndPassword(this.auth, this.user.email, password).then(async()=>{
-          //  return password;
-            await this.register(user,passwordUser,foto_perfil,foto_paciente)
-            this.login(this.user,password,funcionExito,finaly)
-  
-          }).catch((error)=>{
-            console.error('Error al verificar la contraseña', error);
-          })
-        }else{
-          console.error('No se ingreso ninguna password');
+      this.RegistrarOtroConEmail(user.email, password) .then(async (data:any) => {
+
+
+        user._id = data.localId
+
+        user.foto_perfil = await this.guardarFoto(foto_perfil, user._id)
+        if (user.rol == "paciente") {
+          user.foto_paciente = await this.guardarFoto(foto_paciente, (user._id + 'p'))
         }
-      
-   
+        await this.addNewUser(user)
+        //this.addNewLogin(res.user.uid)
+        await this.updateUserProfile( data.idToken, user.nombre,  user.foto_perfil )
+        await this.sendEmailVerification( data.idToken)
 
+        //  return password;
+        //await this.register(user, passwordUser, foto_perfil, foto_paciente)
+        //this.login(this.user, password, funcionExito, finaly)
+        if(funcionExito)funcionExito()
+        if(finaly)finaly()
+      }).catch((error) => {
+        this.toastSVC.error("error al registrar el usuario el usuario")
+        console.error(error);
+        if(finaly)finaly()
+      }).finally(()=>{if(finaly)finaly})
+   
   }
 
- 
+  private async updateUserProfile(idToken: string, displayName: string, photoURL: string) {
+    const headers = {
+      'Content-Type': 'application/json'
+    };
+
+    const url = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${environment.firebase.apiKey}`;
+
+    const body = {
+      idToken: idToken,
+      displayName: displayName,
+      photoUrl: photoURL,
+      returnSecureToken: true
+    };
+
+    try {
+      const response: any = await firstValueFrom(this.httpSvc.post(url, body, { headers }));
+      console.log('User profile updated:', response);
+    } catch (error: any) {
+      console.log('Error updating profile:', error);
+      throw error;
+    }
+  }
+
+  private async sendEmailVerification(idToken: string) {
+    const headers = {
+      'Content-Type': 'application/json'
+    };
+
+    const url = `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${environment.firebase.apiKey}`;
+
+    const body = {
+      requestType: 'VERIFY_EMAIL',
+      idToken: idToken
+    };
+
+    try {
+      const response: any = await firstValueFrom(this.httpSvc.post(url, body, { headers }));
+      console.log('Verification email sent:', response);
+    } catch (error: any) {
+      console.log('Error sending verification email:', error);
+      throw error;
+    }
+  }
+
+
+
+
+httpSvc = inject(HttpClient)
+  async RegistrarOtroConEmail(email: string, password: string): Promise<string> {
+    const headers = {
+      'Content-Type': 'application/json'
+    };
+
+    console.log(email)
+    console.log(password)
+    const url: string = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebase.apiKey}`;
+
+    const body = {
+      email: email,
+      password: password,
+      returnSecureToken: true
+    };
+
+    try {
+      const response: any = await firstValueFrom(this.httpSvc.post(url, body, { headers }));
+      return response;
+    } catch (error: any) {
+      console.log(error);
+      return Promise.reject(error.error.error.message);
+    }
+  }
+
+
   async register(user: User, password: string, foto_perfil: any, foto_paciente?: any) {
 
-    if(await this.existeDni(user.dni)){
+    if (await this.existeDni(user.dni)) {
       this.toastSVC.error("ya existe una cuenta con este dni")
-      return 
+      return
     }
     await createUserWithEmailAndPassword(this.auth, user.email, password).then(async res => {
 
@@ -172,7 +280,7 @@ export class AuthService {
       }
       await this.addNewUser(user)
       //this.addNewLogin(res.user.uid)
-      this.actualizarUsuario({ displayName: user.nombre,photoURL:user.foto_perfil })
+      this.actualizarUsuario({ displayName: user.nombre, photoURL: user.foto_perfil })
       sendEmailVerification(res.user)
       this.logout(true)
     }).catch(err => {
@@ -183,9 +291,9 @@ export class AuthService {
 
   //actualiza el valor de displayName del usuario
   actualizarUsuario({ displayName, photoURL }: { displayName?: string | null | undefined; photoURL?: string | null | undefined; }) {
-    
-    
-    updateProfile(this.user, { displayName ,photoURL})
+
+
+    updateProfile(this.user, { displayName, photoURL })
   }
 
 
@@ -211,82 +319,82 @@ export class AuthService {
     return snapshot.docs.length !== 0;
   }
 
-  getData(funcion:(repartidores:User[])=>void,finaly?:()=>void) {
+  getData(funcion: (repartidores: User[]) => void, finaly?: () => void) {
     // Crear una consulta ordenada por el campo 'fecha' en orden ascendente
-    const mensajeRef = collection(this.dbFirebase,this.bdUsuarios)
+    const mensajeRef = collection(this.dbFirebase, this.bdUsuarios)
     const q = query(mensajeRef)
-    
-    try{
-      return onSnapshot(q,(snapshot:QuerySnapshot)=>{
-        let repartidores :User[] =[];
-        snapshot.forEach((doc:QueryDocumentSnapshot)=>{
-          let repartidorIn =  doc.data() as User
-          repartidores.push( repartidorIn)
+
+    try {
+      return onSnapshot(q, (snapshot: QuerySnapshot) => {
+        let repartidores: User[] = [];
+        snapshot.forEach((doc: QueryDocumentSnapshot) => {
+          let repartidorIn = doc.data() as User
+          repartidores.push(repartidorIn)
         })
         funcion(repartidores)
-        finaly?finaly():""
+        finaly ? finaly() : ""
       })
-    }catch(error){
-      finaly?finaly():""
+    } catch (error) {
+      finaly ? finaly() : ""
       return error
     }
   }
 
-  getDataId(idUsuario:string,funcion:(repartidores:User)=>void,finaly?:()=>void) {
+  getDataId(idUsuario: string, funcion: (repartidores: User) => void, finaly?: () => void) {
     // Crear una consulta ordenada por el campo 'fecha' en orden ascendente
-    const mensajeRef = collection(this.dbFirebase,this.bdUsuarios)
-    const q = query(mensajeRef,where("_id","==",idUsuario))
-    
-    try{
-      return onSnapshot(q,(snapshot:QuerySnapshot)=>{
-        snapshot.forEach((doc:QueryDocumentSnapshot)=>{
-          let repartidorIn =  doc.data() as User
+    const mensajeRef = collection(this.dbFirebase, this.bdUsuarios)
+    const q = query(mensajeRef, where("_id", "==", idUsuario))
+
+    try {
+      return onSnapshot(q, (snapshot: QuerySnapshot) => {
+        snapshot.forEach((doc: QueryDocumentSnapshot) => {
+          let repartidorIn = doc.data() as User
           funcion(repartidorIn)
         })
-        finaly?finaly():""
+        finaly ? finaly() : ""
       })
-    }catch(error){
-      finaly?finaly():""
+    } catch (error) {
+      finaly ? finaly() : ""
       return error
     }
   }
 
-  getDataPacientes(funcion:(repartidores:User[])=>void,finaly?:()=>void) {
+  getDataPacientes(funcion: (repartidores: User[]) => void, finaly?: () => void) {
     // Crear una consulta ordenada por el campo 'fecha' en orden ascendente
-    const mensajeRef = collection(this.dbFirebase,this.bdUsuarios)
-    const q = query(mensajeRef,where("rol","==",'paciente'))
-    
-    try{
-      return onSnapshot(q,(snapshot:QuerySnapshot)=>{
-        const listaPacientes:User[] =[]
-        snapshot.forEach((doc:QueryDocumentSnapshot)=>{
-          let repartidorIn =  doc.data() as User
+    const mensajeRef = collection(this.dbFirebase, this.bdUsuarios)
+    const q = query(mensajeRef, where("rol", "==", 'paciente'))
+
+    try {
+      return onSnapshot(q, (snapshot: QuerySnapshot) => {
+        const listaPacientes: User[] = []
+        snapshot.forEach((doc: QueryDocumentSnapshot) => {
+          let repartidorIn = doc.data() as User
           listaPacientes.push(repartidorIn)
         })
         funcion(listaPacientes)
-        finaly?finaly():""
+        finaly ? finaly() : ""
       })
-    }catch(error){
-      finaly?finaly():""
+    } catch (error) {
+      finaly ? finaly() : ""
       return error
     }
   }
 
-  async  updateData(usuario:User){
+  async updateData(usuario: User) {
 
-    const retorno :any = {mensaje:"error el crear una usuario",estado:false}
-    
-    try{
-      const document = doc(this.dbFirebase,this.bdUsuarios,usuario._id)
-      await updateDoc(document,{ ...usuario})
+    const retorno: any = { mensaje: "error el crear una usuario", estado: false }
+
+    try {
+      const document = doc(this.dbFirebase, this.bdUsuarios, usuario._id)
+      await updateDoc(document, { ...usuario })
       retorno.estado = true
       retorno.mensaje = "usuario modificado con exito"
       return retorno
-    }catch(err){
+    } catch (err) {
       retorno.mensaje = err
       return retorno
     }
-    }
+  }
 
 
   //cambia el mensaje de erorr de firebase por uno personalizado

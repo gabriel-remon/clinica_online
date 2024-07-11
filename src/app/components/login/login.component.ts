@@ -35,6 +35,7 @@ export class LoginComponent {
 
     this.spinner.show();
     await this.authFirebase.login(this.form.value.email!, this.form.value.password!, () => {
+     
       this.utilsSvc.goto(this.pathExito)
     },()=>{this.spinner.hide();})
 

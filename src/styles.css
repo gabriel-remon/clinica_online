@@ -11,3 +11,35 @@ html, body{
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+@keyframes slide-out{
+    from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(100%);
+      }    
+}
+
+@keyframes slide-in{
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    
+}
+
+
+::view-transition-new(animacion1){
+    animation-duration: 1s;
+    animation-name:-ua-view-transition-fade-in,slide-in ;
+}
+::view-transition-old(animacion1){
+    animation-duration: 1s;
+    animation-name:-ua-view-transition-fade-out,slide-out ;
+}

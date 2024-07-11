@@ -61,8 +61,7 @@ export class TablaEspecialidadesComponent {
 
   
 
-  seleccionar(especialidad:Especialidad){
-    console.log(especialidad)
+  seleccionar(especialidad:Especialidad){ 
     this.especialidadSelect.emit(especialidad)
   }
 

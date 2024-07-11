@@ -11,6 +11,10 @@ import { User } from '../../core/models/user.model';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { environment } from '../../../environments/environment';
+import { RechaptchaService } from '../../core/services/rechaptcha.service';
+import { ageMaxValidator, ageMinValidator, dateNotInFutureValidator } from '../../core/validators/date.validators';
+import { fileTypeValidator } from '../../core/validators/file.validator';
 @Component({
   selector: 'app-form-register',
   standalone: true,
@@ -27,11 +31,13 @@ export class FormRegisterComponent {
   @Input() tipo!: "admin" | "especialista" | "paciente";
   @Input() datoIngreso!: Especialidad[]|ObraSocial;
   @Input() registro: boolean=false;
+  @Input() registroConAdmin: boolean=false;
 
+  claveWeb:string=""
   toast = inject(ToastrService)
   spinner = inject(NgxSpinnerService)
   authFirebase = inject(AuthService)
-
+  captchaSvc = inject(RechaptchaService)
   utilSvc = inject(UtilService)
   //dialog= inject(MatDialog)
   //dialogRef = inject(MatDialogRef<ConfirmPasswordComponent>)
@@ -40,13 +46,13 @@ export class FormRegisterComponent {
   imagenPaciente:any;
 
   form = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      nombre: new FormControl('', [Validators.required]),
-      apellido: new FormControl('', [Validators.required]),
-      dni: new FormControl('', [Validators.required]),
-      nacimiento: new FormControl('', [Validators.required]),
-      foto: new FormControl('', ),
+      email: new FormControl('', [Validators.required, Validators.email,Validators.maxLength(100)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(5),Validators.maxLength(60)]),
+      nombre: new FormControl('', [Validators.required,Validators.maxLength(60),Validators.minLength(4)]),
+      apellido: new FormControl('', [Validators.required,Validators.maxLength(60),Validators.minLength(4)]),
+      dni: new FormControl('', [Validators.required,Validators.max(100000000)]),
+      nacimiento: new FormControl('', [Validators.required,dateNotInFutureValidator(),ageMaxValidator(130)]),
+      foto: new FormControl('',fileTypeValidator(['jpeg', 'png','jpg']) ),
       especialidad:new FormControl('', ),
       obra_social:new FormControl('', ),
         foto_paciente:new FormControl('', ),
@@ -55,17 +61,19 @@ export class FormRegisterComponent {
     
 
   ngOnInit(): void {
-    
+    this.claveWeb = environment.captchaGoogle.passwordWeb
     this.cambioTipo()
     
   }
-
+  
   ngOnChanges(): void {
     if(this.datoIngreso && this.tipo == 'especialista' ){
+      this.form.controls.nacimiento.addValidators([Validators.required,ageMinValidator(18)])
       this.form.controls.especialidad.setValue("a", { emitEvent: false });
     }
     if(this.datoIngreso && this.tipo == 'paciente'){
       this.form.controls.obra_social.setValue("a", { emitEvent: false });
+      this.form.controls.foto_paciente.addValidators([Validators.required,fileTypeValidator(['image/jpeg', 'image/png'])])
     }
   }
 
@@ -115,7 +123,11 @@ export class FormRegisterComponent {
 
 
   resolved(captchaResponse: any) {
-    console.log(`Resolved captcha with response: ${captchaResponse}`);
+    //console.log(captchaResponse);
+    /*
+    this.captchaSvc.validateRecaptcha(captchaResponse).subscribe(data=>{
+      console.log(data.sus)
+    })*/
   }
 
   async submit() {
@@ -142,7 +154,6 @@ export class FormRegisterComponent {
       rol: this.tipo,
       horario:null
     }
-    if (this.tipo != "admin") {
       this.spinner.show();
       if (this.tipo == "especialista") {
         newUser = {
@@ -158,12 +169,23 @@ export class FormRegisterComponent {
           obra_social: this.datoIngreso
         } 
       }
-      await this.authFirebase.register(newUser as User, this.form.value.password!,this.imagenPerfil,this.imagenPaciente).then(() => {
-        if(this.pathExito){this.utilSvc.goto(this.pathExito)}
-        this.toast.success("registro exitoso, verifique su casilla de mail para validadr la cuenta", "Registro")
-      })
-      this.spinner.hide();
-    }else{
+      if(this.registroConAdmin){
+        this.spinner.show();
+        await this.authFirebase.registerAdmin(newUser as User, this.form.value.password!,this.imagenPerfil,()=>{
+          this.toast.success("registro exitoso, verifique su casilla de mail para validadr la cuenta", "Registro")
+          this.form.reset();
+        },()=>{
+          this.spinner.hide();
+        },this.imagenPaciente)
+      }else{
+
+        await this.authFirebase.register(newUser as User, this.form.value.password!,this.imagenPerfil,this.imagenPaciente).then(() => {
+          if(this.pathExito){this.utilSvc.goto(this.pathExito)}
+          this.toast.success("registro exitoso, verifique su casilla de mail para validadr la cuenta", "Registro")
+        })
+        this.spinner.hide();
+      }
+   
 /*
       const dialogRef = this.dialog.open(ConfirmPasswordComponent, {
         width: '400px',
@@ -182,10 +204,6 @@ export class FormRegisterComponent {
 
 
 */
-      
-    }
-
-
     //const res = this.localStorage.login(this.formLogin.value)?"usuario logeado":"no se encontro el usuario"
   }
 }

@@ -1,7 +1,10 @@
 .circulo{
     width: 200px;
     height: 200px;
-    margin: 10px;
+    margin: auto;
+    margin-top: 10px;
+        margin-bottom: 10px;
+    
     border-radius: 50%;
     background-color: black;
     text-align: center;

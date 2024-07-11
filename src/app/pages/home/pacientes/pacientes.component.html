@@ -3,5 +3,5 @@
 <div class="container text-center align-items-center contenedor">
 
     <h3>Pacientes atendidos </h3>
-    <app-tabla-pacientes (especialidadSelect)="seleccionar($event)" [especialistas]="usuarios"></app-tabla-pacientes>
+    <app-tabla-pacientes (especialidadSelect)="seleccionar($event)" [style.view-transition-name]="'animacion1'" [especialistas]="usuarios"></app-tabla-pacientes>
 </div>

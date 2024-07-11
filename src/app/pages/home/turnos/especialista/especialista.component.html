@@ -1,21 +1,18 @@
 <app-header></app-header>
+<div class="row contenedor buscador shadow" >
 
-<div class="row contenedor">
-
-    <div class="col-4">
-        <button type="button" class="row btn btn-primary" (click)="filtrarEspecialidad()">
-            Filtrar por Especialidad
-        </button> 
+    <div class="col-2">
+        <label for="filtros">Fitros</label>
+        
     </div>
-    <div class="col-4 " >
+    <div class="col">
 
-            <button type="button" class="row btn btn-primary" (click)="filtrarPaciente()">
-                Filtrar por Paciente
-            </button> 
+        <input type="text" id="filtros"  class="form-control me-2" (input)="filtroGeneral($event)">
     </div>
+
 </div>
 
-<div *ngIf="turnos.length>0">
+<div *ngIf="turnos.length>0"  [style.view-transition-name]="'animacion1'">
     <app-tabla-turnos
     rol="especialista"
     [turnos]="turnos">

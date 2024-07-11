@@ -4,7 +4,7 @@
         ingresar nueva obra social
     </button>
 
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 ">
+    <div class="row ">
         <ng-container *ngFor="let item of obra_sociales">
             <div class="col"  (click)="seleccionar(item)" [id]="item.id">
                 <div class="circulo">

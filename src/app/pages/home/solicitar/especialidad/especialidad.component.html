@@ -2,6 +2,7 @@
 
 
 <app-tabla-especialista *ngIf="!especialista" 
+[style.view-transition-name]="'animacion1'"
 [especialistas]="especialistas"
 (especialidadSelect)="SeleccionarEspecialista($event)"
 ></app-tabla-especialista>

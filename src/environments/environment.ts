@@ -10,7 +10,11 @@ export const environment = {
         "messagingSenderId": "602937129959"
       },
       captchaGoogle:{
-        passwordWeb: "6LceSAgqAAAAAEnqQxh9R2Q08gpZm449fgVMNRZe",
-        secretPassword:"6LceSAgqAAAAAIM2Jf9LQXKEoyS_l7I2KnQFsgpW"
+
+
+        passwordWeb: "6Ld5xA0qAAAAAMU0J4Xx5rrltpeat-UQ4366XkMK",
+        secretPassword:"6Ld5xA0qAAAAAELcQEyjtKfikPecVW4cPUFgdJJd"
+        //passwordWeb: "6LceSAgqAAAAAEnqQxh9R2Q08gpZm449fgVMNRZe",
+        //secretPassword:"6LceSAgqAAAAAIM2Jf9LQXKEoyS_l7I2KnQFsgpW"
     }
 };

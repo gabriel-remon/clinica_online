@@ -1,9 +1,9 @@
 <app-header></app-header>
 
 
-<div class="container text-center">
+<div class="container text-center" [style.view-transition-name]="'animacion1'">
     <div class="row">
         <h2>formulario de registro</h2>
-        <app-form-register tipo="admin" pathExito="auth"></app-form-register>
+        <app-form-register tipo="admin" [registroConAdmin]="true"></app-form-register>
     </div>
 </div>

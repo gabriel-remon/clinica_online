@@ -1,6 +1,6 @@
 <app-header></app-header>
 
-<div class="container text-center">
+<div class="container text-center" [style.view-transition-name]="'animacion1'">
     <div class="contenedor" *ngIf="usuarioLogin">
         <div class="row elemento perfil shadow">
             <app-perfil-min></app-perfil-min>

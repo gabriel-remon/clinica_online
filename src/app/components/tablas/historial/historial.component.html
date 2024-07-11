@@ -2,6 +2,12 @@
 
 
     <h1>Historiales medicos</h1>
+    <button  type="button" class="row btn btn-primary" (click)="verTurnos(turnos)">
+        Ver todos los turnos
+    </button>
+    <button  type="button" class="row btn btn-primary" (click)="descargarTurnos(turnos)">
+        Descargar todos los turnos
+    </button>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 ">
         <ng-container *ngFor="let item of turnos">
             <ng-container *ngIf="item.historia_clinica">

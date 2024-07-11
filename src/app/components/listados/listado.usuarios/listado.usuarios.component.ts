@@ -4,6 +4,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { AuthService } from '../../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { User } from '../../../core/models/user.model';
+import { ExcelService } from '../../../core/services/excel.service';
 
 @Component({
   selector: 'app-listado-usuarios',
@@ -17,6 +18,7 @@ export class ListadoUsuariosComponent {
   authSvc = inject(AuthService)
   usuarios:any=[]
   spinnerSvc = inject(NgxSpinnerService)
+  excelSvc = inject(ExcelService)
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -53,5 +55,23 @@ export class ListadoUsuariosComponent {
     this.authSvc.updateData(especialista)
   }
 
+  generarexcel(){
+    const data = [
+      { name: 'John', age: 30, city: 'New York' },
+      { name: 'Peter', age: 25, city: 'London' },
+      { name: 'Ana', age: 22, city: 'Berlin' }
+    ];
 
+    //@ts-ignore
+    const usuariosFiltrados = this.usuarios[0].map(usuario=> ({
+      _id: usuario._id,
+      nombre: usuario.nombre,
+      apellido: usuario.apellido,
+      fecha_nacimiento: usuario.fecha_nacimiento,
+      rol: usuario.rol,
+      dni: usuario.dni,
+    }))
+    
+    this.excelSvc.exportAsExcelFile(usuariosFiltrados,'usuarios')
+  }
 }

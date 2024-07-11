@@ -1,5 +1,5 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withViewTransitions } from '@angular/router';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
@@ -14,12 +14,15 @@ import { ReCaptchaV3Provider } from '@angular/fire/app-check';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    importProvidersFrom(ReCaptchaV3Provider),
+    importProvidersFrom(ReCaptchaV3Provider),/*
     {
       provide: RECAPTCHA_SETTINGS,
       useValue: { siteKey: environment.captchaGoogle.passwordWeb } as RecaptchaSettings,
-    },
-    provideRouter(routes),
+    },*/
+    provideRouter(
+      routes,
+      withViewTransitions()
+    ),
 
     provideAnimationsAsync(),
     provideToastr({timeOut:4000,preventDuplicates:true}),

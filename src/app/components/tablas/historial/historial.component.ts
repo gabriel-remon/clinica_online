@@ -18,8 +18,6 @@ export class HistorialComponent {
 
   constructor() {
     // Cargar las fuentes Roboto manualmente
-    
-   
   }
 
   formatDate(dia: any): string {
@@ -27,18 +25,391 @@ export class HistorialComponent {
     const day = String(date.getDate()).padStart(2, '0'); // Asegura que el día tenga dos dígitos
     const month = date.toLocaleString('es-ES', { month: 'long' }); // Obtiene el nombre del mes en español
     const year = date.getFullYear();
-  
+
     return `${day} ${month} ${year}`;
   }
-  
+
   descargarPDF(turno: Turno) {
-    
-    this.generarPdf(turno).then(data=>data.download("historial-medico-"+turno.id+".pdf"))
+
+    this.generarPdf(turno).then(data => data.download("historial-medico-" + turno.id + ".pdf"))
   }
-  verPDF(item:Turno){
-    this.generarPdf(item).then(data=>data.open())
+  verPDF(item: Turno) {
+    this.generarPdf(item).then(data => data.open())
   }
 
+  async formatoTurnos(turnos:any[]) {
+    const turnosFiltrados: any = []
+    turnos.forEach(turno => {
+      if (turno.historia_clinica) {
+        turnosFiltrados.push(
+
+          {
+            columns: [
+              {
+                text: 'Detalles del turno',
+                color: '#aaaaab',
+                bold: true,
+                fontSize: 14,
+                alignment: 'left',
+                margin: [0, 20, 0, 5],
+              },
+            ],
+          },
+          {
+            columns: [
+              {
+                text: 'Profesional',
+                bold: true,
+                color: '#333333',
+                alignment: 'left',
+              },
+              {
+                text: turno.especialista.nombre + " " + turno.especialista.apellido,
+                bold: true,
+                color: '#333333',
+                alignment: 'left',
+              },
+            ],
+          },
+          {
+            columns: [
+              {
+                text: 'Especialidad',
+                bold: true,
+                color: '#333333',
+                alignment: 'left',
+              },
+              {
+                text: turno.especialidad.nombre,
+                bold: true,
+                color: '#333333',
+                alignment: 'left',
+              },
+            ],
+          },
+          {
+            columns: [
+              {
+                text: 'Comentario',
+                color: '#aaaaab',
+                bold: true,
+                margin: [0, 7, 0, 3],
+              }
+            ],
+          },
+          {
+            columns: [
+              {
+                text: turno.comentario,
+                style: 'invoiceBillingAddress',
+              }
+            ],
+          },
+          {
+            columns: [
+              {
+                text: "calidad de atencion: " + turno.atencion + " puntos",
+                style: 'invoiceBillingAddress',
+              }
+            ],
+          },
+          '\n\n',
+          {
+            width: '100%',
+            alignment: 'center',
+            text: 'Detalles medicos',
+            bold: true,
+            margin: [0, 10, 0, 10],
+            fontSize: 15,
+          },
+          {
+            layout: {
+              defaultBorder: false,
+              hLineWidth: function (i: any, node: any) {
+                return 1;
+              },
+              vLineWidth: function (i: any, node: any) {
+                return 1;
+              },
+              hLineColor: function (i: any, node: any) {
+                if (i === 1 || i === 0) {
+                  return '#bfdde8';
+                }
+                return '#eaeaea';
+              },
+              vLineColor: function (i: any, node: any) {
+                return '#eaeaea';
+              },
+              hLineStyle: function (i: any, node: any) {
+                // if (i === 0 || i === node.table.body.length) {
+                return null;
+                //}
+              },
+              // vLineStyle: function (i, node) { return {dash: { length: 10, space: 4 }}; },
+              paddingLeft: function (i: any, node: any) {
+                return 10;
+              },
+              paddingRight: function (i: any, node: any) {
+                return 10;
+              },
+              paddingTop: function (i: any, node: any) {
+                return 2;
+              },
+              paddingBottom: function (i: any, node: any) {
+                return 2;
+              },
+              fillColor: function (rowIndex: any, node: any, columnIndex: any) {
+                return '#fff';
+              },
+            },
+            table: {
+              headerRows: 1,
+              widths: ['*', 80],
+              body: [
+                [
+                  {
+                    text: 'DESCRIPCION',
+                    fillColor: '#eaf2f5',
+                    border: [false, true, false, true],
+                    margin: [0, 5, 0, 5],
+                    textTransform: 'uppercase',
+                  },
+                  {
+                    text: 'VALOR',
+                    border: [false, true, false, true],
+                    alignment: 'right',
+                    fillColor: '#eaf2f5',
+                    margin: [0, 5, 0, 5],
+                    textTransform: 'uppercase',
+                  },
+                ],
+                [
+                  {
+                    text: "Altura",
+                    border: [false, false, false, true],
+                    margin: [0, 5, 0, 5],
+                    alignment: 'left',
+                  },
+                  {
+                    border: [false, false, false, true],
+                    text: turno.historia_clinica?.altura + " cm",
+                    fillColor: '#f5f5f5',
+                    alignment: 'right',
+                    margin: [0, 5, 0, 5],
+                  },
+                ],
+                [
+                  {
+                    text: 'Peso',
+                    border: [false, false, false, true],
+                    margin: [0, 5, 0, 5],
+                    alignment: 'left',
+                  },
+                  {
+                    text: turno.historia_clinica?.peso + " Kg",
+                    border: [false, false, false, true],
+                    fillColor: '#f5f5f5',
+                    alignment: 'right',
+                    margin: [0, 5, 0, 5],
+                  },
+                ],
+                [
+                  {
+                    text: 'Presion',
+                    border: [false, false, false, true],
+                    margin: [0, 5, 0, 5],
+                    alignment: 'left',
+                  },
+                  {
+                    text: turno.historia_clinica?.presion + " puntos",
+                    border: [false, false, false, true],
+                    fillColor: '#f5f5f5',
+                    alignment: 'right',
+                    margin: [0, 5, 0, 5],
+                  },
+                ],
+                [
+                  {
+                    text: 'Temperatura',
+                    border: [false, false, false, true],
+                    margin: [0, 5, 0, 5],
+                    alignment: 'left',
+                  },
+                  {
+                    text: turno.historia_clinica?.temperatura + "°C",
+                    border: [false, false, false, true],
+                    fillColor: '#f5f5f5',
+                    alignment: 'right',
+                    margin: [0, 5, 0, 5],
+                  },
+                ],
+                [
+                  {
+                    text: turno.historia_clinica?.datos_dinamicos != null && turno.historia_clinica?.datos_dinamicos[0] != null ? turno.historia_clinica?.datos_dinamicos[0].clave : "",
+                    border: [false, false, false, true],
+                    margin: [0, 5, 0, 5],
+                    alignment: 'left',
+                  },
+                  {
+                    text: turno.historia_clinica?.datos_dinamicos != null && turno.historia_clinica?.datos_dinamicos[0] != null ? turno.historia_clinica?.datos_dinamicos[0].valor : "",
+                    border: [false, false, false, true],
+                    fillColor: '#f5f5f5',
+                    alignment: 'right',
+                    margin: [0, 5, 0, 5],
+                  },
+                ],
+                [
+                  {
+                    text: turno.historia_clinica?.datos_dinamicos != null && turno.historia_clinica?.datos_dinamicos[1] != null ? turno.historia_clinica?.datos_dinamicos[1].clave : "",
+                    border: [false, false, false, true],
+                    margin: [0, 5, 0, 5],
+                    alignment: 'left',
+                  },
+                  {
+                    text: turno.historia_clinica?.datos_dinamicos != null && turno.historia_clinica?.datos_dinamicos[1] != null ? turno.historia_clinica?.datos_dinamicos[1].valor : "",
+                    border: [false, false, false, true],
+                    fillColor: '#f5f5f5',
+                    alignment: 'right',
+                    margin: [0, 5, 0, 5],
+                  },
+                ],
+                [
+                  {
+                    text: turno.historia_clinica?.datos_dinamicos != null && turno.historia_clinica?.datos_dinamicos[2] != null ? turno.historia_clinica?.datos_dinamicos[2].clave : "",
+                    border: [false, false, false, true],
+                    margin: [0, 5, 0, 5],
+                    alignment: 'left',
+                  },
+                  {
+                    text: turno.historia_clinica?.datos_dinamicos != null && turno.historia_clinica?.datos_dinamicos[2] != null ? turno.historia_clinica?.datos_dinamicos[2].valor : "",
+                    border: [false, false, false, true],
+                    fillColor: '#f5f5f5',
+                    alignment: 'right',
+                    margin: [0, 5, 0, 5],
+                  },
+                ],
+              ],
+            },
+          },
+        )
+      }
+
+    })
+
+    const logo = await this.getBase64ImageFromURL('assets/logo.png')
+    const docDefinition: any = {
+
+      content: [
+
+        {
+          columns: [
+            {
+              image: logo,
+              width: 150,
+            },
+            [
+              {
+                text: 'Historal medico',
+                color: '#333333',
+                width: '*',
+                fontSize: 28,
+                bold: true,
+                alignment: 'right',
+                margin: [0, 0, 0, 15],
+              },
+              {
+                stack: [
+                  {
+                    columns: [
+                      {
+                        text: 'Id paciente',
+                        color: '#aaaaab',
+                        bold: true,
+                        width: '*',
+                        fontSize: 12,
+                        alignment: 'right',
+                      },
+                      {
+                        text: this.turnos[0].paciente.id,
+                        bold: true,
+                        color: '#333333',
+                        fontSize: 12,
+                        alignment: 'right',
+                        width: 100,
+                      },
+                    ],
+                  },
+                  {
+                    columns: [
+                      {
+                        text: 'Fecha',
+                        color: '#aaaaab',
+                        bold: true,
+                        width: '*',
+                        fontSize: 12,
+                        alignment: 'right',
+                      },
+                      {
+                        text: new Date().toString(),
+                        bold: true,
+                        color: '#333333',
+                        fontSize: 12,
+                        alignment: 'right',
+                        width: 100,
+                      },
+                    ],
+                  },
+                  {
+                    columns: [
+                      {
+                        text: 'Paciente:',
+                        color: '#aaaaab',
+                        bold: true,
+                        fontSize: 12,
+                        alignment: 'right',
+                        width: '*',
+                      },
+                      {
+                        text: this.turnos[0].paciente.nombre + " " + this.turnos[0].paciente.apellido,
+                        bold: true,
+                        fontSize: 14,
+                        alignment: 'right',
+                        color: '#333333',
+                        width: 100,
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          ],
+        },
+      ],
+      styles: {
+        notesTitle: {
+          fontSize: 10,
+          bold: true,
+          margin: [0, 50, 0, 3],
+        },
+        notesText: {
+          fontSize: 10,
+        },
+      },
+      defaultStyle: {
+        columnGap: 20,
+        //font: 'Quicksand',
+      },
+    };
+    docDefinition.content.push(...turnosFiltrados)
+    return pdfMake.createPdf(docDefinition)
+  }
+  async verTurnos(turnos:any[]) {
+    (await this.formatoTurnos(turnos)).open()
+  }
+
+  async descargarTurnos(turnos:any[]) {
+    (await this.formatoTurnos(turnos)).download('turnos')
+  }
 
   private getBase64ImageFromURL(url: string): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -60,15 +431,15 @@ export class HistorialComponent {
     });
   }
 
-  async generarPdf(turno:Turno){
+  async generarPdf(turno: Turno) {
     const logo = await this.getBase64ImageFromURL('assets/logo.png')
-    const docDefinition :any= {
-      
+    const docDefinition: any = {
+
       content: [
         {
           columns: [
             {
-              image:logo,
+              image: logo,
               width: 150,
             },
             [
@@ -134,7 +505,7 @@ export class HistorialComponent {
                         width: '*',
                       },
                       {
-                        text: turno.paciente.nombre+" "+turno.paciente.apellido,
+                        text: turno.paciente.nombre + " " + turno.paciente.apellido,
                         bold: true,
                         fontSize: 14,
                         alignment: 'right',
@@ -169,14 +540,14 @@ export class HistorialComponent {
               alignment: 'left',
             },
             {
-              text: turno.especialista.nombre+" "+turno.especialista.apellido,
+              text: turno.especialista.nombre + " " + turno.especialista.apellido,
               bold: true,
               color: '#333333',
               alignment: 'left',
             },
           ],
         },
-        
+
         {
           columns: [
             {
@@ -214,7 +585,7 @@ export class HistorialComponent {
         {
           columns: [
             {
-              text: "calidad de atencion: "+turno.atencion+" puntos",
+              text: "calidad de atencion: " + turno.atencion + " puntos",
               style: 'invoiceBillingAddress',
             }
           ],
@@ -231,40 +602,40 @@ export class HistorialComponent {
         {
           layout: {
             defaultBorder: false,
-            hLineWidth: function(i:any, node:any) {
+            hLineWidth: function (i: any, node: any) {
               return 1;
             },
-            vLineWidth: function(i:any, node:any) {
+            vLineWidth: function (i: any, node: any) {
               return 1;
             },
-            hLineColor: function(i:any, node:any) {
+            hLineColor: function (i: any, node: any) {
               if (i === 1 || i === 0) {
                 return '#bfdde8';
               }
               return '#eaeaea';
             },
-            vLineColor: function(i:any, node:any) {
+            vLineColor: function (i: any, node: any) {
               return '#eaeaea';
             },
-            hLineStyle: function(i:any, node:any) {
+            hLineStyle: function (i: any, node: any) {
               // if (i === 0 || i === node.table.body.length) {
               return null;
               //}
             },
             // vLineStyle: function (i, node) { return {dash: { length: 10, space: 4 }}; },
-            paddingLeft: function(i:any, node:any) {
+            paddingLeft: function (i: any, node: any) {
               return 10;
             },
-            paddingRight: function(i:any, node:any) {
+            paddingRight: function (i: any, node: any) {
               return 10;
             },
-            paddingTop: function(i:any, node:any) {
+            paddingTop: function (i: any, node: any) {
               return 2;
             },
-            paddingBottom: function(i:any, node:any) {
+            paddingBottom: function (i: any, node: any) {
               return 2;
             },
-            fillColor: function(rowIndex:any, node:any, columnIndex:any) {
+            fillColor: function (rowIndex: any, node: any, columnIndex: any) {
               return '#fff';
             },
           },
@@ -298,7 +669,7 @@ export class HistorialComponent {
                 },
                 {
                   border: [false, false, false, true],
-                  text: turno.historia_clinica?.altura+" cm",
+                  text: turno.historia_clinica?.altura + " cm",
                   fillColor: '#f5f5f5',
                   alignment: 'right',
                   margin: [0, 5, 0, 5],
@@ -312,7 +683,7 @@ export class HistorialComponent {
                   alignment: 'left',
                 },
                 {
-                  text: turno.historia_clinica?.peso+" Kg",
+                  text: turno.historia_clinica?.peso + " Kg",
                   border: [false, false, false, true],
                   fillColor: '#f5f5f5',
                   alignment: 'right',
@@ -327,7 +698,7 @@ export class HistorialComponent {
                   alignment: 'left',
                 },
                 {
-                  text: turno.historia_clinica?.presion+" puntos",
+                  text: turno.historia_clinica?.presion + " puntos",
                   border: [false, false, false, true],
                   fillColor: '#f5f5f5',
                   alignment: 'right',
@@ -342,7 +713,7 @@ export class HistorialComponent {
                   alignment: 'left',
                 },
                 {
-                  text: turno.historia_clinica?.temperatura+"°C",
+                  text: turno.historia_clinica?.temperatura + "°C",
                   border: [false, false, false, true],
                   fillColor: '#f5f5f5',
                   alignment: 'right',
@@ -351,13 +722,13 @@ export class HistorialComponent {
               ],
               [
                 {
-                  text: turno.historia_clinica?.datos_dinamicos!=null && turno.historia_clinica?.datos_dinamicos[0]!=null ?turno.historia_clinica?.datos_dinamicos[0].clave:"",
+                  text: turno.historia_clinica?.datos_dinamicos != null && turno.historia_clinica?.datos_dinamicos[0] != null ? turno.historia_clinica?.datos_dinamicos[0].clave : "",
                   border: [false, false, false, true],
                   margin: [0, 5, 0, 5],
                   alignment: 'left',
                 },
                 {
-                  text: turno.historia_clinica?.datos_dinamicos!=null && turno.historia_clinica?.datos_dinamicos[0]!=null ?turno.historia_clinica?.datos_dinamicos[0].valor:"",
+                  text: turno.historia_clinica?.datos_dinamicos != null && turno.historia_clinica?.datos_dinamicos[0] != null ? turno.historia_clinica?.datos_dinamicos[0].valor : "",
                   border: [false, false, false, true],
                   fillColor: '#f5f5f5',
                   alignment: 'right',
@@ -366,13 +737,13 @@ export class HistorialComponent {
               ],
               [
                 {
-                  text: turno.historia_clinica?.datos_dinamicos!=null && turno.historia_clinica?.datos_dinamicos[1]!=null ?turno.historia_clinica?.datos_dinamicos[1].clave:"",
+                  text: turno.historia_clinica?.datos_dinamicos != null && turno.historia_clinica?.datos_dinamicos[1] != null ? turno.historia_clinica?.datos_dinamicos[1].clave : "",
                   border: [false, false, false, true],
                   margin: [0, 5, 0, 5],
                   alignment: 'left',
                 },
                 {
-                  text: turno.historia_clinica?.datos_dinamicos!=null && turno.historia_clinica?.datos_dinamicos[1]!=null ?turno.historia_clinica?.datos_dinamicos[1].valor:"",
+                  text: turno.historia_clinica?.datos_dinamicos != null && turno.historia_clinica?.datos_dinamicos[1] != null ? turno.historia_clinica?.datos_dinamicos[1].valor : "",
                   border: [false, false, false, true],
                   fillColor: '#f5f5f5',
                   alignment: 'right',
@@ -381,13 +752,13 @@ export class HistorialComponent {
               ],
               [
                 {
-                  text: turno.historia_clinica?.datos_dinamicos!=null && turno.historia_clinica?.datos_dinamicos[2]!=null ?turno.historia_clinica?.datos_dinamicos[2].clave:"",
+                  text: turno.historia_clinica?.datos_dinamicos != null && turno.historia_clinica?.datos_dinamicos[2] != null ? turno.historia_clinica?.datos_dinamicos[2].clave : "",
                   border: [false, false, false, true],
                   margin: [0, 5, 0, 5],
                   alignment: 'left',
                 },
                 {
-                  text: turno.historia_clinica?.datos_dinamicos!=null && turno.historia_clinica?.datos_dinamicos[2]!=null ?turno.historia_clinica?.datos_dinamicos[2].valor:"",
+                  text: turno.historia_clinica?.datos_dinamicos != null && turno.historia_clinica?.datos_dinamicos[2] != null ? turno.historia_clinica?.datos_dinamicos[2].valor : "",
                   border: [false, false, false, true],
                   fillColor: '#f5f5f5',
                   alignment: 'right',
@@ -412,9 +783,9 @@ export class HistorialComponent {
         columnGap: 20,
         //font: 'Quicksand',
       },
-        };
-    
-        return pdfMake.createPdf(docDefinition)
-    
+    };
+
+    return pdfMake.createPdf(docDefinition)
+
   }
 }
