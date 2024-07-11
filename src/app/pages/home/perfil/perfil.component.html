@@ -33,7 +33,7 @@
             <div class="row">
                 <h2 *ngIf="turnos.length==0">No hay ningun historial medico</h2>
                 <app-tabla-historial *ngIf="turnos.length!=0"
-                [turnos]="turnos"></app-tabla-historial>
+                [turnos]="turnos" [pacinte]="esPaciente"></app-tabla-historial>
             </div>
         </ng-container>
         

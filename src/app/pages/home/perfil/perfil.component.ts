@@ -39,12 +39,14 @@ export class PerfilPage {
   toastSvc = inject(ToastrService)
   turnos:Turno[] = []
   especialidad!:Especialidad
-
+  esPaciente:boolean=false
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     if(this.authSvc.userLogin){
       this.user = this.authSvc.userLogin
+
+      if(this.user.rol == 'paciente'){this.esPaciente=true}
       this.turnosSvc.turnoDePaciente(this.user._id,data=>{
 
         for(let i =0;i<data.length;i++){
@@ -60,6 +62,7 @@ export class PerfilPage {
     this.authSvc.user$.subscribe(data=>{
       this.spinnerSvc.hide()
       this.user = data
+      if(this.user.rol == 'paciente'){this.esPaciente=true}
       this.turnosSvc.turnoDePaciente(this.user._id,data=>{
 
         for(let i =0;i<data.length;i++){

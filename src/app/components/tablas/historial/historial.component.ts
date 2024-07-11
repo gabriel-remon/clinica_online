@@ -1,8 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { Turno } from '../../../core/models/turno.model';
 import { CommonModule } from '@angular/common';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { FiltroComponent } from '../../modals/filtro/filtro.component';
+import { MatDialog } from '@angular/material/dialog';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
   selector: 'app-tabla-historial',
@@ -14,7 +16,9 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 export class HistorialComponent {
 
   @Input() turnos: Turno[] = [];
+  @Input() pacinte: boolean = false;
   objetoPDF: any;
+  dialog = inject(MatDialog)
 
   constructor() {
     // Cargar las fuentes Roboto manualmente
@@ -409,6 +413,52 @@ export class HistorialComponent {
 
   async descargarTurnos(turnos:any[]) {
     (await this.formatoTurnos(turnos)).download('turnos')
+  }
+
+  descargarTurnosPorEspecialista(turnos:Turno[]){
+
+    const especialistas:any[] = []
+
+    this.turnos.forEach(turno => {
+      const nombreEspecialista = turno.especialista.nombre;
+
+      const especialistaEncontrado = especialistas.find(
+        especialista => especialista.id === turno.especialista.id
+      );
+
+      if (especialistaEncontrado) {
+        //especialistaEncontrado.cantidadTurnos++;
+      } else {
+        especialistas.push({
+          nombre: nombreEspecialista+" "+turno.especialista.apellido,
+          foto: turno.especialista.foto,
+          id: turno.especialista.id
+        });
+      }
+    });
+
+
+
+    const dialogRef = this.dialog.open(FiltroComponent, {
+        
+      data: especialistas
+    });
+
+    dialogRef.afterClosed().subscribe(async result => 
+      {
+        if(result != undefined){
+          const turnosEspecialista:any[] =[]
+
+          turnos.forEach(turno=>{
+            if(turno.especialista.id == result.id){
+              turnosEspecialista.push(turno)
+            }
+          })
+
+          const pdf = await this.formatoTurnos(turnos) 
+          pdf.download('turnos')
+        }
+      })
   }
 
   private getBase64ImageFromURL(url: string): Promise<string> {
