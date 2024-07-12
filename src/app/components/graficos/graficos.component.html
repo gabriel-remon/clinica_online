@@ -1,53 +1,65 @@
 <div class="container text-center contenedor shadow">
 
-        <div class="row ">
+    <button  class="row btn btn-primary botonCustom" (click)="descargargraficos()">Descargar PDF de todos los graficos</button>
+    <div class="row ">
+
 
                 <div class="col " (click)="seleccionar('dd')" *ngIf="graficoIngresos">
-                    <div class="bg-dark text-light titulo">
-                        <p>grafico ingresos</p>
-                    </div>
-                    <div class="circulo">
-                        <div echarts [options]="graficoIngresos" class="chart"></div>
+                    <div  id="chartIngreso">
+                        <div class="bg-dark text-light titulo">
+                            <p>grafico ingresos</p>
+                        </div>
+                        <div class="circulo">
+                            <div echarts [options]="graficoIngresos" class="chart"></div>
+                        </div>
                     </div>
                     <button  class="row btn btn-primary" (click)="descargarExcel(this.informeIngresos,'ingresos')">Descargar excel</button>
                 </div>
 
                 <div class="col " (click)="seleccionar('dd')" *ngIf="graficoTurnosPorEspecialidad">
-                    <div class="bg-dark text-light titulo">
-                        <p>grafico especialidades</p>
-                    </div>
-                    <div class="circulo">
-                        <div echarts [options]="graficoTurnosPorEspecialidad" class="chart"></div>
+                    <div id="chartEspecialidades" >
+                        <div class="bg-dark text-light titulo">
+                            <p>grafico especialidades</p>
+                        </div>
+                        <div class="circulo">
+                            <div echarts [options]="graficoTurnosPorEspecialidad" class="chart"></div>
+                        </div>
                     </div>
                     <button  class="row btn btn-primary" (click)="descargarExcel(this.informeTurnosPorEspecialidad,'turnos_especialidades')">Descargar excel</button>
                 </div>
 
-                <div class="col " (click)="seleccionar('dd')" *ngIf="graficoTurnosPorDia">
-                    <div class="bg-dark text-light titulo">
-                        <p>grafico turnos por dia</p>
-                    </div>
-                    <div class="circulo">
-                        <div echarts [options]="graficoTurnosPorDia" class="chart"></div>
+                <div class="col " (click)="seleccionar('dd')"  *ngIf="graficoTurnosPorDia">
+                    <div id="chartDia" >
+                        <div class="bg-dark text-light titulo">
+                            <p>grafico turnos por dia</p>
+                        </div>
+                        <div class="circulo">
+                            <div echarts [options]="graficoTurnosPorDia" class="chart"></div>
+                        </div>
                     </div>
                     <button  class="row btn btn-primary" (click)="descargarExcel(this.informeTurnosPorDia,'turnos_dia')">Descargar excel</button>
                 </div>
 
                 <div class="col " (click)="seleccionar('dd')" *ngIf="graficoTurnosPorEspecialista">
-                    <div class="bg-dark text-light titulo">
-                        <p>grafico total de turnos</p>
-                    </div>
-                    <div class="circulo">
-                        <div echarts [options]="graficoTurnosPorEspecialista" class="chart"></div>
+                    <div id="chartTurnos" >
+                        <div class="bg-dark text-light titulo">
+                            <p>grafico total de turnos</p>
+                        </div>
+                        <div class="circulo">
+                            <div echarts [options]="graficoTurnosPorEspecialista" class="chart"></div>
+                        </div>
                     </div>
                     <button  class="row btn btn-primary" (click)="descargarExcel(this.informeTurnosPorEspecialista,'turnos_especialistas')">Descargar excel</button>
                 </div>
 
                 <div class="col " (click)="seleccionar('dd')" *ngIf="graficoTurnosFinalizados">
-                    <div class="bg-dark text-light titulo">
-                        <p>grafico turnosRealizados</p>
-                    </div>
-                    <div class="circulo">
-                        <div echarts [options]="graficoTurnosFinalizados" class="chart"></div>
+                    <div id="chartRealizados">
+                        <div class="bg-dark text-light titulo">
+                            <p>grafico turnosRealizados</p>
+                        </div>
+                        <div class="circulo">
+                            <div echarts [options]="graficoTurnosFinalizados"  class="chart"></div>
+                        </div>
                     </div>
                     <button  class="row btn btn-primary" (click)="descargarExcel(this.informeTurnosFinalizados,'turnos_finalizados')">Descargar excel</button>
                 </div>

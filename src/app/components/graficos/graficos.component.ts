@@ -5,6 +5,9 @@ import { TurnoService } from '../../core/services/turno.service';
 import { AuthService } from '../../core/services/auth.service';
 import { ExcelService } from '../../core/services/excel.service';
 import { Turno } from '../../core/models/turno.model';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-graficos',
@@ -21,6 +24,7 @@ export class GraficosComponent {
   turnosSvc = inject(TurnoService)
   authSvc = inject(AuthService)
   excelSvc = inject(ExcelService)
+  spinnerSvc = inject(NgxSpinnerService)
 
   turnos: any[] = []
   ingresos: any[] = []
@@ -63,6 +67,35 @@ export class GraficosComponent {
   seleccionar(item: any) {
   }
 
+  descargargraficos(){
+
+    this.spinnerSvc.show()
+    const charts = [
+      document.getElementById('chartIngreso'),
+      document.getElementById('chartEspecialidades'),
+      document.getElementById('chartDia'),
+      document.getElementById('chartTurnos'),
+      document.getElementById('chartRealizados'),
+    ]
+
+    const pdf = new jsPDF();
+    let positionY = 10; // Y position in the PDF
+
+    charts.forEach((chartElement, index) => {
+      if (chartElement) {
+        html2canvas(chartElement).then(canvas => {
+          const imgData = canvas.toDataURL('image/png');
+          pdf.addImage(imgData, 'PNG', 10, 10, 180, 160); // Ajusta las dimensiones según tus necesidades
+          if (index < charts.length - 1) {
+            pdf.addPage(); // Añadir una nueva página para el siguiente gráfico
+          }
+          if (index === charts.length - 1) {
+            pdf.save('charts.pdf'); // Guardar el PDF después de añadir todos los gráficos
+          }
+        }).finally(()=>{this.spinnerSvc.hide()});
+      }
+    });
+  }
 
   descargarExcel(data: any, titulo: string) {
     this.excelSvc.exportAsExcelFile(data, titulo)
@@ -104,6 +137,10 @@ export class GraficosComponent {
 
     
     this.graficoIngresos = {
+      tooltip: {
+        trigger: 'item',
+        formatter: '{b}:<br/> {c} ingresos',
+      },
       xAxis: {
         type: 'category',
         data: auxGrafico.map(item => item.nombre)
@@ -289,8 +326,7 @@ export class GraficosComponent {
         {
           name: 'especialista',
           type: 'pie',
-          radius: [30, 110],
-          roseType: 'area',
+          radius: '50%',
           data: especialistasConCantidad.map(item=>({name:item.nombre,value:item.cantidadTurnos}))
         },
       ],
